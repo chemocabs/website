@@ -1,0 +1,10 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#fceff9"/>
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="serif" font-size="24" fill="#E91E8C">
+    The Pink '57 Bel Air
+  </text>
+  <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#D1177D">
+    (Image Placeholder)
+  </text>
+  <rect x="200" y="250" width="400" height="150" rx="20" stroke="#E91E8C" stroke-width="2" stroke-dasharray="10 10"/>
+</svg>

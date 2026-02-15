@@ -1,0 +1,56 @@
+/* ===== VOLUNTEER ===== */
+.volunteer {
+    padding: var(--section-padding);
+    background: linear-gradient(180deg, var(--pink-bg) 0%, var(--white) 100%);
+}
+
+.volunteer__roles {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.volunteer__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: var(--white);
+    border: 2px solid #e5e7eb;
+    border-radius: var(--radius-full);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--charcoal);
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.volunteer__pill:hover {
+    border-color: var(--pink-primary);
+    background: var(--pink-bg);
+    color: var(--pink-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(233, 30, 140, 0.15);
+}
+
+.volunteer__count {
+    font-size: 0.85rem;
+    color: var(--body-gray);
+    margin-top: 16px;
+}
+
+@media (max-width: 640px) {
+    .volunteer__roles {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        padding-bottom: 8px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .volunteer__pill {
+        flex-shrink: 0;
+    }
+}

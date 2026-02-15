@@ -1,0 +1,44 @@
+/* ===== WHAT WE DO ===== */
+.what-we-do {
+    padding: var(--section-padding);
+    background: var(--light-gray-bg);
+}
+
+.text-center {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.what-we-do__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+.what-we-do__card {
+    text-align: center;
+    padding: 48px 32px;
+}
+
+.what-we-do__icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.what-we-do__title {
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+}
+
+.what-we-do__desc {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--body-gray);
+}
+
+@media (max-width: 768px) {
+    .what-we-do__grid {
+        grid-template-columns: 1fr;
+    }
+}

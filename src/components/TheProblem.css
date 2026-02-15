@@ -1,0 +1,67 @@
+/* ===== THE PROBLEM ===== */
+.the-problem {
+    padding: var(--section-padding);
+    background: var(--white);
+}
+
+.the-problem__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.the-problem__stat {
+    text-align: center;
+    padding: 40px 24px;
+    border-radius: var(--radius-lg);
+    background: var(--charcoal);
+    transition: all var(--transition-base);
+    cursor: default;
+}
+
+.the-problem__stat:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-glow);
+}
+
+.the-problem__value {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 800;
+    color: var(--pink-primary);
+    margin-bottom: 12px;
+}
+
+.the-problem__label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+}
+
+.the-problem__cta {
+    color: var(--pink-primary);
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.the-problem__cta:hover {
+    color: var(--pink-hover);
+    gap: 12px;
+}
+
+@media (max-width: 1024px) {
+    .the-problem__stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .the-problem__stats {
+        grid-template-columns: 1fr;
+    }
+}

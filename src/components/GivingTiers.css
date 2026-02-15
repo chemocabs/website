@@ -1,0 +1,110 @@
+/* ===== GIVING TIERS ===== */
+.giving-tiers {
+    padding: var(--section-padding);
+    background: var(--white);
+}
+
+.giving-tiers__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    align-items: start;
+}
+
+.giving-tiers__card {
+    position: relative;
+    text-align: center;
+    padding: 48px 32px 36px;
+}
+
+.giving-tiers__card--featured {
+    border: 2px solid var(--pink-primary);
+    transform: scale(1.03);
+    box-shadow: var(--shadow-pink);
+}
+
+.giving-tiers__card--featured:hover {
+    transform: scale(1.03) translateY(-6px);
+}
+
+.giving-tiers__card--premium {
+    background: linear-gradient(135deg, var(--dark-black) 0%, var(--charcoal) 100%);
+    color: var(--white);
+}
+
+.giving-tiers__card--premium .giving-tiers__name,
+.giving-tiers__card--premium .giving-tiers__desc,
+.giving-tiers__card--premium .giving-tiers__range {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.giving-tiers__card--premium li {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.giving-tiers__badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.giving-tiers__emoji {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 16px;
+}
+
+.giving-tiers__name {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.giving-tiers__range {
+    font-size: 0.9rem;
+    color: var(--pink-primary);
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.giving-tiers__desc {
+    font-size: 0.9rem;
+    color: var(--body-gray);
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.giving-tiers__perks {
+    text-align: left;
+    margin-bottom: 28px;
+}
+
+.giving-tiers__perks li {
+    padding: 6px 0;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.giving-tiers__check {
+    color: var(--success-green);
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+    .giving-tiers__grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .giving-tiers__card--featured {
+        transform: none;
+    }
+
+    .giving-tiers__card--featured:hover {
+        transform: translateY(-6px);
+    }
+}

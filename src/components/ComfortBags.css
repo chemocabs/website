@@ -1,0 +1,167 @@
+/* ===== COMFORT BAGS ===== */
+.comfort-bags {
+    padding: var(--section-padding);
+    background: linear-gradient(180deg, var(--pink-bg) 0%, var(--white) 100%);
+}
+
+.comfort-bags__showcase {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+    margin-bottom: 60px;
+}
+
+.comfort-bags__image-frame {
+    position: relative;
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.comfort-bags__image-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    color: var(--body-gray);
+    font-size: 1rem;
+}
+
+.comfort-bags__placeholder-icon {
+    font-size: 5rem;
+}
+
+.comfort-bags__image-badges {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.comfort-bags__description {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--body-gray);
+    margin-bottom: 28px;
+}
+
+.comfort-bags__items-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.comfort-bags__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: var(--white);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-sm);
+    font-size: 0.85rem;
+    transition: all var(--transition-fast);
+}
+
+.comfort-bags__item:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.comfort-bags__item-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.comfort-bags__item-name {
+    color: var(--charcoal);
+    font-weight: 500;
+}
+
+/* Bag tiers */
+.comfort-bags__tiers {
+    text-align: center;
+}
+
+.comfort-bags__tiers-title {
+    font-size: 1.5rem;
+    margin-bottom: 32px;
+}
+
+.comfort-bags__tiers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.comfort-bags__tier-card {
+    position: relative;
+    background: var(--white);
+    border: 2px solid #e5e7eb;
+    border-radius: var(--radius-lg);
+    padding: 32px 20px 24px;
+    text-align: center;
+    transition: all var(--transition-base);
+}
+
+.comfort-bags__tier-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.comfort-bags__tier-card.featured {
+    border-color: var(--pink-primary);
+    box-shadow: var(--shadow-pink);
+}
+
+.comfort-bags__tier-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.comfort-bags__tier-name {
+    font-weight: 700;
+    color: var(--dark-black);
+    margin-bottom: 4px;
+}
+
+.comfort-bags__tier-bags {
+    font-size: 0.85rem;
+    color: var(--body-gray);
+    margin-bottom: 8px;
+}
+
+.comfort-bags__tier-price {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--pink-primary);
+    margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+    .comfort-bags__showcase {
+        grid-template-columns: 1fr;
+    }
+
+    .comfort-bags__items-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .comfort-bags__tiers-grid {
+        grid-template-columns: 1fr;
+        max-width: 360px;
+    }
+}

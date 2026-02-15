@@ -1,0 +1,206 @@
+/* ===== CORPORATE PARTNERS ===== */
+.corporate {
+    padding: var(--section-padding);
+    background: var(--dark-black);
+    position: relative;
+    overflow: hidden;
+}
+
+.corporate__orbs {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.corporate__orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+}
+
+.corporate__orb--1 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(233, 30, 140, 0.15) 0%, transparent 70%);
+    top: 10%;
+    right: -5%;
+    animation: float 15s ease-in-out infinite;
+}
+
+.corporate__orb--2 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(212, 168, 83, 0.1) 0%, transparent 70%);
+    bottom: 10%;
+    left: -5%;
+    animation: float 18s ease-in-out 3s infinite;
+}
+
+.corporate__selling-point {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.95rem;
+    max-width: 700px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+    text-align: center;
+}
+
+.corporate__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-bottom: 64px;
+}
+
+.corporate__card {
+    text-align: center;
+    padding: 48px 28px 36px;
+    position: relative;
+}
+
+/* Silver */
+.corporate__card--silver {
+    background: linear-gradient(135deg, #f8f8f8 0%, #e8e8e8 100%);
+    border: 1px solid #d0d0d0;
+}
+
+/* Gold */
+.corporate__card--gold {
+    background: linear-gradient(135deg, #fef9ef 0%, var(--gold-light) 100%);
+    border: 2px solid var(--gold-trust);
+    transform: scale(1.03);
+    box-shadow: 0 10px 40px rgba(212, 168, 83, 0.25);
+}
+
+.corporate__card--gold:hover {
+    transform: scale(1.03) translateY(-6px);
+}
+
+/* Platinum */
+.corporate__card--platinum {
+    background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1a 100%);
+    border: 2px solid var(--pink-primary);
+    box-shadow: var(--shadow-glow);
+    color: var(--white);
+}
+
+.corporate__card--platinum .corporate__name,
+.corporate__card--platinum .corporate__desc {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.corporate__card--platinum li {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.corporate__badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--gold-trust), #e6c468);
+    color: #3d2600;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 5px 14px;
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+}
+
+.corporate__icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 16px;
+}
+
+.corporate__name {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+}
+
+.corporate__range {
+    font-size: 0.9rem;
+    color: var(--pink-primary);
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.corporate__desc {
+    font-size: 0.9rem;
+    color: var(--body-gray);
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.corporate__perks {
+    text-align: left;
+    margin-bottom: 28px;
+}
+
+.corporate__perks li {
+    padding: 5px 0;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.corporate__check {
+    color: var(--success-green);
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+/* Partner logos */
+.corporate__logos {
+    text-align: center;
+}
+
+.corporate__logos-title {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.1rem;
+    margin-bottom: 24px;
+}
+
+.corporate__logos-grid {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.corporate__logo-placeholder {
+    width: 160px;
+    height: 60px;
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.corporate__logos-sub {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.85rem;
+}
+
+@media (max-width: 1024px) {
+    .corporate__grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: 0 auto 64px;
+    }
+
+    .corporate__card--gold {
+        transform: none;
+    }
+
+    .corporate__card--gold:hover {
+        transform: translateY(-6px);
+    }
+}

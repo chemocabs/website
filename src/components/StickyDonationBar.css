@@ -1,0 +1,81 @@
+/* ===== STICKY DONATION BAR ===== */
+.sticky-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 900;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(233, 30, 140, 0.3);
+    padding: 12px 0;
+    animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.sticky-bar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.sticky-bar__message {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sticky-bar__icon {
+    font-size: 1.1rem;
+}
+
+.sticky-bar__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sticky-bar__close {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.1rem;
+    padding: 4px 8px;
+    cursor: pointer;
+    transition: color var(--transition-fast);
+}
+
+.sticky-bar__close:hover {
+    color: var(--white);
+}
+
+@media (max-width: 640px) {
+    .sticky-bar__message {
+        display: none;
+    }
+
+    .sticky-bar__inner {
+        justify-content: center;
+    }
+
+    .sticky-bar .btn {
+        width: 100%;
+        max-width: 280px;
+    }
+}

@@ -1,0 +1,59 @@
+/* ===== PATIENT STORIES ===== */
+.stories {
+    padding: var(--section-padding);
+    background: var(--white);
+}
+
+.stories__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+.stories__card {
+    position: relative;
+    padding: 48px 32px 32px;
+}
+
+.stories__quote-mark {
+    font-family: var(--font-heading);
+    font-size: 5rem;
+    line-height: 1;
+    color: var(--pink-light);
+    position: absolute;
+    top: 8px;
+    left: 24px;
+    opacity: 0.5;
+}
+
+.stories__quote {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--charcoal);
+    font-style: italic;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+}
+
+.stories__author {
+    border-top: 1px solid #f3f4f6;
+    padding-top: 16px;
+}
+
+.stories__name {
+    font-weight: 700;
+    color: var(--dark-black);
+    font-size: 0.95rem;
+}
+
+.stories__detail {
+    font-size: 0.8rem;
+    color: var(--body-gray);
+}
+
+@media (max-width: 768px) {
+    .stories__grid {
+        grid-template-columns: 1fr;
+    }
+}
