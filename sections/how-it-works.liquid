@@ -3,18 +3,47 @@
     <div class="text-center fade-up">
       <h2 class="section-heading" id="how-heading">{{ section.settings.heading }}</h2>
     </div>
+
     <div class="how-it-works__steps">
-      {%- for block in section.blocks -%}
-        <div class="how-it-works__step fade-up" {{ block.shopify_attributes }}>
-          <div class="how-it-works__num">{{ forloop.index }}</div>
-          {%- unless forloop.last -%}
-            <div class="how-it-works__connector" aria-hidden="true"></div>
-          {%- endunless -%}
-          <h3 class="how-it-works__title">{{ block.settings.title }}</h3>
-          <p class="how-it-works__desc">{{ block.settings.description }}</p>
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="how-it-works__step fade-up" {{ block.shopify_attributes }}>
+            <div class="how-it-works__num">{{ forloop.index }}</div>
+            {%- unless forloop.last -%}
+              <div class="how-it-works__connector" aria-hidden="true"></div>
+            {%- endunless -%}
+            <h3 class="how-it-works__title">{{ block.settings.title }}</h3>
+            <p class="how-it-works__desc">{{ block.settings.description }}</p>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        {%- comment -%} Default Content Fallback {%- endcomment -%}
+        <div class="how-it-works__step fade-up">
+          <div class="how-it-works__num">1</div>
+          <div class="how-it-works__connector" aria-hidden="true"></div>
+          <h3 class="how-it-works__title">Submit a Request</h3>
+          <p class="how-it-works__desc">Fill out our simple form with your treatment details and pickup location.</p>
         </div>
-      {%- endfor -%}
+        <div class="how-it-works__step fade-up">
+          <div class="how-it-works__num">2</div>
+          <div class="how-it-works__connector" aria-hidden="true"></div>
+          <h3 class="how-it-works__title">We Match You</h3>
+          <p class="how-it-works__desc">Our team matches you with a volunteer driver or arranges a rideshare.</p>
+        </div>
+        <div class="how-it-works__step fade-up">
+          <div class="how-it-works__num">3</div>
+          <div class="how-it-works__connector" aria-hidden="true"></div>
+          <h3 class="how-it-works__title">Ride to Treatment</h3>
+          <p class="how-it-works__desc">Your ride arrives at your door — completely free. No wallet needed.</p>
+        </div>
+        <div class="how-it-works__step fade-up">
+          <div class="how-it-works__num">4</div>
+          <h3 class="how-it-works__title">Get Home Safe</h3>
+          <p class="how-it-works__desc">After your appointment, we get you home safely to rest and recover.</p>
+        </div>
+      {%- endif -%}
     </div>
+
   </div>
 </section>
 
