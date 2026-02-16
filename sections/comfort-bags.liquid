@@ -24,31 +24,73 @@
       <div class="comfort-bags__details-side">
         <div class="comfort-bags__description">{{ section.settings.description }}</div>
         <div class="comfort-bags__items-grid">
-          {%- for block in section.blocks -%}
-            {% if block.type == 'item' %}
-              <div class="comfort-bags__item" {{ block.shopify_attributes }}>
-                <span class="comfort-bags__item-icon">{{ block.settings.icon }}</span>
-                <span class="comfort-bags__item-name">{{ block.settings.name }}</span>
-              </div>
-            {% endif %}
-          {%- endfor -%}
+          {%- assign items_count = 0 -%}
+          {%- for block in section.blocks -%}{% if block.type == 'item' %}{% assign items_count = items_count | plus: 1 %}{% endif %}{%- endfor -%}
+          
+          {%- if items_count > 0 -%}
+            {%- for block in section.blocks -%}
+              {% if block.type == 'item' %}
+                <div class="comfort-bags__item" {{ block.shopify_attributes }}>
+                  <span class="comfort-bags__item-icon">{{ block.settings.icon }}</span>
+                  <span class="comfort-bags__item-name">{{ block.settings.name }}</span>
+                </div>
+              {% endif %}
+            {%- endfor -%}
+          {%- else -%}
+            {%- comment -%} Default Items Fallback {%- endcomment -%}
+            <div class="comfort-bags__item"><span class="comfort-bags__item-icon">🧣</span><span class="comfort-bags__item-name">Ultra-soft microfleece blanket</span></div>
+            <div class="comfort-bags__item"><span class="comfort-bags__item-icon">🧦</span><span class="comfort-bags__item-name">Cozy non-slip socks</span></div>
+            <div class="comfort-bags__item"><span class="comfort-bags__item-icon">😴</span><span class="comfort-bags__item-name">Eye mask</span></div>
+            <div class="comfort-bags__item"><span class="comfort-bags__item-icon">💧</span><span class="comfort-bags__item-name">Unscented lip balm & lotion</span></div>
+            <div class="comfort-bags__item"><span class="comfort-bags__item-icon">🚰</span><span class="comfort-bags__item-name">Quality water bottle</span></div>
+            <div class="comfort-bags__item"><span class="comfort-bags__item-icon">🍬</span><span class="comfort-bags__item-name">Dry-mouth & ginger lozenges</span></div>
+            <div class="comfort-bags__item"><span class="comfort-bags__item-icon">🍪</span><span class="comfort-bags__item-name">Light snacks</span></div>
+            <div class="comfort-bags__item"><span class="comfort-bags__item-icon">🤲</span><span class="comfort-bags__item-name">Nausea relief bands</span></div>
+            <div class="comfort-bags__item"><span class="comfort-bags__item-icon">💌</span><span class="comfort-bags__item-name">Handwritten encouragement</span></div>
+          {%- endif -%}
         </div>
       </div>
     </div>
     <div class="comfort-bags__tiers fade-up">
       <h3 class="comfort-bags__tiers-title">{{ section.settings.tiers_title }}</h3>
       <div class="comfort-bags__tiers-grid">
-        {%- for block in section.blocks -%}
-          {% if block.type == 'bag_tier' %}
-            <div class="comfort-bags__tier-card {% if block.settings.featured %}featured{% endif %}" {{ block.shopify_attributes }}>
-              {% if block.settings.badge != blank %}<span class="comfort-bags__tier-badge badge badge-pink">{{ block.settings.badge }}</span>{% endif %}
-              <p class="comfort-bags__tier-name">{{ block.settings.name }}</p>
-              <p class="comfort-bags__tier-bags">{{ block.settings.bags_count }} bag</p>
-              <p class="comfort-bags__tier-price">{{ block.settings.price }}</p>
-              <a href="#donate" class="btn btn-sm btn-full {% if block.settings.featured %}btn-pink{% else %}btn-outline-pink{% endif %}">{{ block.settings.cta }}</a>
-            </div>
-          {% endif %}
-        {%- endfor -%}
+        {%- assign tiers_count = 0 -%}
+        {%- for block in section.blocks -%}{% if block.type == 'bag_tier' %}{% assign tiers_count = tiers_count | plus: 1 %}{% endif %}{%- endfor -%}
+
+        {%- if tiers_count > 0 -%}
+          {%- for block in section.blocks -%}
+            {% if block.type == 'bag_tier' %}
+              <div class="comfort-bags__tier-card {% if block.settings.featured %}featured{% endif %}" {{ block.shopify_attributes }}>
+                {% if block.settings.badge != blank %}<span class="comfort-bags__tier-badge badge badge-pink">{{ block.settings.badge }}</span>{% endif %}
+                <p class="comfort-bags__tier-name">{{ block.settings.name }}</p>
+                <p class="comfort-bags__tier-bags">{{ block.settings.bags_count }} bag</p>
+                <p class="comfort-bags__tier-price">{{ block.settings.price }}</p>
+                <a href="#donate" class="btn btn-sm btn-full {% if block.settings.featured %}btn-pink{% else %}btn-outline-pink{% endif %}">{{ block.settings.cta }}</a>
+              </div>
+            {% endif %}
+          {%- endfor -%}
+        {%- else -%}
+          {%- comment -%} Default Tiers Fallback {%- endcomment -%}
+          <div class="comfort-bags__tier-card">
+            <p class="comfort-bags__tier-name">Single Comfort Bag</p>
+            <p class="comfort-bags__tier-bags">1 bag</p>
+            <p class="comfort-bags__tier-price">$170</p>
+            <a href="#donate" class="btn btn-sm btn-full btn-outline-pink">Donate 1 Bag</a>
+          </div>
+          <div class="comfort-bags__tier-card featured">
+            <span class="comfort-bags__tier-badge badge badge-pink">★ MOST POPULAR</span>
+            <p class="comfort-bags__tier-name">Double the Comfort</p>
+            <p class="comfort-bags__tier-bags">2 bags</p>
+            <p class="comfort-bags__tier-price">$340</p>
+            <a href="#donate" class="btn btn-sm btn-full btn-pink">Donate 2 Bags</a>
+          </div>
+          <div class="comfort-bags__tier-card">
+            <p class="comfort-bags__tier-name">Comfort Champion</p>
+            <p class="comfort-bags__tier-bags">5 bags</p>
+            <p class="comfort-bags__tier-price">$850</p>
+            <a href="#donate" class="btn btn-sm btn-full btn-outline-pink">Donate 5 Bags</a>
+          </div>
+        {%- endif -%}
       </div>
     </div>
   </div>

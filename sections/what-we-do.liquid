@@ -4,15 +4,36 @@
       <p class="section-label">WHAT WE DO</p>
       <h2 class="section-heading" id="what-we-do-heading">{{ section.settings.heading }}</h2>
     </div>
+
     <div class="what-we-do__grid stagger-children">
-      {%- for block in section.blocks -%}
-        <div class="what-we-do__card card fade-up" {{ block.shopify_attributes }}>
-          <span class="what-we-do__icon" aria-hidden="true">{{ block.settings.icon }}</span>
-          <h3 class="what-we-do__title">{{ block.settings.title }}</h3>
-          <p class="what-we-do__desc">{{ block.settings.description }}</p>
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="what-we-do__card card fade-up hover-lift" {{ block.shopify_attributes }}>
+            <span class="what-we-do__icon" aria-hidden="true">{{ block.settings.icon }}</span>
+            <h3 class="what-we-do__title">{{ block.settings.title }}</h3>
+            <p class="what-we-do__desc">{{ block.settings.description }}</p>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        {%- comment -%} Default Content Fallback {%- endcomment -%}
+        <div class="what-we-do__card card fade-up hover-lift">
+          <span class="what-we-do__icon" aria-hidden="true">🚗</span>
+          <h3 class="what-we-do__title">Volunteer Drivers</h3>
+          <p class="what-we-do__desc">Compassionate community volunteers provide door-to-door rides to and from treatment centres across Canada. A friendly face on a tough day makes all the difference.</p>
         </div>
-      {%- endfor -%}
+        <div class="what-we-do__card card fade-up hover-lift">
+          <span class="what-we-do__icon" aria-hidden="true">📱</span>
+          <h3 class="what-we-do__title">Rideshare Coverage</h3>
+          <p class="what-we-do__desc">We cover Uber, Lyft, Hopp, and other rideshare costs so patients can get to treatment on their schedule — no wallet required, no stress involved.</p>
+        </div>
+        <div class="what-we-do__card card fade-up hover-lift">
+          <span class="what-we-do__icon" aria-hidden="true">🎁</span>
+          <h3 class="what-we-do__title">Comfort Bags</h3>
+          <p class="what-we-do__desc">Our Deluxe Comfort Bags are packed with oncology-recommended essentials — from cozy blankets to nausea relief — because care extends beyond the ride.</p>
+        </div>
+      {%- endif -%}
     </div>
+
   </div>
 </section>
 

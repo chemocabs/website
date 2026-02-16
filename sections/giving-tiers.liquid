@@ -4,24 +4,67 @@
       <h2 class="section-heading" id="tiers-heading">{{ section.settings.heading }}</h2>
       <p class="section-subheading">{{ section.settings.subheading }}</p>
     </div>
+
     <div class="giving-tiers__grid stagger-children">
-      {%- for block in section.blocks -%}
-        <div class="giving-tiers__card card fade-up giving-tiers__card--{{ block.settings.style }}" {{ block.shopify_attributes }}>
-          {% if block.settings.badge != blank %}<span class="giving-tiers__badge badge badge-pink">{{ block.settings.badge }}</span>{% endif %}
-          <span class="giving-tiers__emoji">{{ block.settings.emoji }}</span>
-          <h3 class="giving-tiers__name">{{ block.settings.name }}</h3>
-          <p class="giving-tiers__range">{{ block.settings.range }}</p>
-          <p class="giving-tiers__desc">{{ block.settings.description }}</p>
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="giving-tiers__card card fade-up giving-tiers__card--{{ block.settings.style }}" {{ block.shopify_attributes }}>
+            {% if block.settings.badge != blank %}<span class="giving-tiers__badge badge badge-pink">{{ block.settings.badge }}</span>{% endif %}
+            <span class="giving-tiers__emoji">{{ block.settings.emoji }}</span>
+            <h3 class="giving-tiers__name">{{ block.settings.name }}</h3>
+            <p class="giving-tiers__range">{{ block.settings.range }}</p>
+            <p class="giving-tiers__desc">{{ block.settings.description }}</p>
+            <ul class="giving-tiers__perks">
+              {% assign perks = block.settings.perks | split: ';' %}
+              {% for perk in perks %}
+                <li><span class="giving-tiers__check">✓</span> {{ perk | strip }}</li>
+              {% endfor %}
+            </ul>
+            <a href="#donate" class="btn {% if block.settings.style == 'featured' %}btn-pink{% else %}btn-outline-pink{% endif %} btn-full">{{ block.settings.cta }}</a>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        {%- comment -%} Default Content Fallback {%- endcomment -%}
+        <div class="giving-tiers__card card fade-up giving-tiers__card--default">
+          <span class="giving-tiers__emoji">💛</span>
+          <h3 class="giving-tiers__name">Hope Giver</h3>
+          <p class="giving-tiers__range">$25–$99/month</p>
+          <p class="giving-tiers__desc">Cover round-trip rides for patients in your community.</p>
           <ul class="giving-tiers__perks">
-            {% assign perks = block.settings.perks | split: ';' %}
-            {% for perk in perks %}
-              <li><span class="giving-tiers__check">✓</span> {{ perk | strip }}</li>
-            {% endfor %}
+            <li><span class="giving-tiers__check">✓</span> Tax receipt</li>
+            <li><span class="giving-tiers__check">✓</span> Welcome email & update</li>
+            <li><span class="giving-tiers__check">✓</span> Name on Donor Wall</li>
           </ul>
-          <a href="#donate" class="btn {% if block.settings.style == 'featured' %}btn-pink{% else %}btn-outline-pink{% endif %} btn-full">{{ block.settings.cta }}</a>
+          <a href="#donate" class="btn btn-outline-pink btn-full">Become a Hope Giver</a>
         </div>
-      {%- endfor -%}
+        <div class="giving-tiers__card card fade-up giving-tiers__card--featured">
+          <span class="giving-tiers__badge badge badge-pink">★ MOST POPULAR</span>
+          <span class="giving-tiers__emoji">💖</span>
+          <h3 class="giving-tiers__name">Care Champion</h3>
+          <p class="giving-tiers__range">$100–$499</p>
+          <p class="giving-tiers__desc">Fund a week of rides and deliver a Comfort Bag.</p>
+          <ul class="giving-tiers__perks">
+            <li><span class="giving-tiers__check">✓</span> Everything in Hope Giver</li>
+            <li><span class="giving-tiers__check">✓</span> Personal thank-you</li>
+            <li><span class="giving-tiers__check">✓</span> Social media recognition</li>
+          </ul>
+          <a href="#donate" class="btn btn-pink btn-full">Become a Care Champion</a>
+        </div>
+        <div class="giving-tiers__card card fade-up giving-tiers__card--premium">
+          <span class="giving-tiers__emoji">🌟</span>
+          <h3 class="giving-tiers__name">Driving Force</h3>
+          <p class="giving-tiers__range">$500+</p>
+          <p class="giving-tiers__desc">Cover a full month of treatment transportation.</p>
+          <ul class="giving-tiers__perks">
+            <li><span class="giving-tiers__check">✓</span> Everything in Care Champion</li>
+            <li><span class="giving-tiers__check">✓</span> Patient story</li>
+            <li><span class="giving-tiers__check">✓</span> Gala invitation</li>
+          </ul>
+          <a href="#donate" class="btn btn-outline-pink btn-full">Become a Driving Force</a>
+        </div>
+      {%- endif -%}
     </div>
+
   </div>
 </section>
 

@@ -7,18 +7,39 @@
         {{ section.settings.subheading }}
       </p>
     </div>
+
     <div class="stories__grid stagger-children">
-      {%- for block in section.blocks -%}
-        <div class="stories__card card fade-up" {{ block.shopify_attributes }}>
-          <span class="stories__quote-mark" aria-hidden="true">"</span>
-          <blockquote class="stories__quote">{{ block.settings.quote }}</blockquote>
-          <div class="stories__author">
-            <p class="stories__name">{{ block.settings.name }}</p>
-            <p class="stories__detail">{{ block.settings.detail }}</p>
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="stories__card card fade-up" {{ block.shopify_attributes }}>
+            <span class="stories__quote-mark" aria-hidden="true">"</span>
+            <blockquote class="stories__quote">{{ block.settings.quote }}</blockquote>
+            <div class="stories__author">
+              <p class="stories__name">{{ block.settings.name }}</p>
+              <p class="stories__detail">{{ block.settings.detail }}</p>
+            </div>
           </div>
+        {%- endfor -%}
+      {%- else -%}
+        {%- comment -%} Default Content Fallback {%- endcomment -%}
+        <div class="stories__card card fade-up">
+          <span class="stories__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="stories__quote">I was so scared about how I'd get to chemo. Chemo Cabs lifted that weight off my shoulders.</blockquote>
+          <div class="stories__author"><p class="stories__name">Sarah M.</p><p class="stories__detail">Breast cancer patient, Toronto</p></div>
         </div>
-      {%- endfor -%}
+        <div class="stories__card card fade-up">
+          <span class="stories__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="stories__quote">My volunteer driver showed up with a smile every single time. That kindness carried me through.</blockquote>
+          <div class="stories__author"><p class="stories__name">Maria L.</p><p class="stories__detail">Leukemia patient, Vancouver</p></div>
+        </div>
+        <div class="stories__card card fade-up">
+          <span class="stories__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="stories__quote">The Comfort Bag was the nicest surprise. It reminded me that people out there actually care.</blockquote>
+          <div class="stories__author"><p class="stories__name">David R.</p><p class="stories__detail">Colon cancer patient, Calgary</p></div>
+        </div>
+      {%- endif -%}
     </div>
+
   </div>
 </section>
 

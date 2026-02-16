@@ -6,13 +6,24 @@
         {{ section.settings.subheading }}
       </p>
     </div>
+
     <div class="volunteer__roles fade-up">
-      {%- for block in section.blocks -%}
-        <div class="volunteer__pill">
-          <span>{{ block.settings.emoji }}</span> {{ block.settings.label }}
-        </div>
-      {%- endfor -%}
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="volunteer__pill">
+            <span>{{ block.settings.emoji }}</span> {{ block.settings.label }}
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        {%- comment -%} Default Content Fallback {%- endcomment -%}
+        <div class="volunteer__pill"><span>🚗</span> Volunteer Driver</div>
+        <div class="volunteer__pill"><span>📣</span> Community Fundraiser</div>
+        <div class="volunteer__pill"><span>🎁</span> Comfort Bag Packer</div>
+        <div class="volunteer__pill"><span>💻</span> Digital Ambassador</div>
+        <div class="volunteer__pill"><span>🎵</span> Event Volunteer</div>
+      {%- endif -%}
     </div>
+
     <div class="text-center fade-up" style="margin-bottom: 0;">
       <a href="mailto:{{ section.settings.email }}" class="btn btn-pink btn-lg">{{ section.settings.cta_text }}</a>
       <p class="volunteer__count">{{ section.settings.footer_text }}</p>

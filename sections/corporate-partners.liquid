@@ -15,30 +15,69 @@
       </p>
     </div>
 
+
     <div class="corporate__grid stagger-children">
-      {%- for block in section.blocks -%}
-        {% if block.type == 'tier' %}
-          <div class="corporate__card card fade-up corporate__card--{{ block.settings.style }}" {{ block.shopify_attributes }}>
-            {% if block.settings.badge != blank %}
-              <span class="corporate__badge">{{ block.settings.badge }}</span>
-            {% endif %}
-            <span class="corporate__icon">{{ block.settings.icon }}</span>
-            <h3 class="corporate__name">{{ block.settings.name }}</h3>
-            <p class="corporate__range">{{ block.settings.range }}</p>
-            <p class="corporate__desc">{{ block.settings.description }}</p>
-            <ul class="corporate__perks">
-              {% assign perks = block.settings.perks | split: ';' %}
-              {% for perk in perks %}
-                <li><span class="corporate__check">✓</span> {{ perk | strip }}</li>
-              {% endfor %}
-            </ul>
-            <a href="mailto:{{ section.settings.contact_email }}" class="btn btn-full {% if block.settings.style == 'gold' %}btn-pink{% else %}btn-outline{% endif %}">
-              {{ block.settings.cta }}
-            </a>
-          </div>
-        {% endif %}
-      {%- endfor -%}
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {% if block.type == 'tier' %}
+            <div class="corporate__card card fade-up corporate__card--{{ block.settings.style }}" {{ block.shopify_attributes }}>
+              {% if block.settings.badge != blank %}<span class="corporate__badge">{{ block.settings.badge }}</span>{% endif %}
+              <span class="corporate__icon">{{ block.settings.icon }}</span>
+              <h3 class="corporate__name">{{ block.settings.name }}</h3>
+              <p class="corporate__range">{{ block.settings.range }}</p>
+              <p class="corporate__desc">{{ block.settings.description }}</p>
+              <ul class="corporate__perks">
+                {% assign perks = block.settings.perks | split: ';' %}
+                {% for perk in perks %}
+                  <li><span class="corporate__check">✓</span> {{ perk | strip }}</li>
+                {% endfor %}
+              </ul>
+              <a href="mailto:{{ section.settings.contact_email }}" class="btn btn-full {% if block.settings.style == 'gold' %}btn-pink{% else %}btn-outline{% endif %}">{{ block.settings.cta }}</a>
+            </div>
+          {% endif %}
+        {%- endfor -%}
+      {%- else -%}
+        {%- comment -%} Default Content Fallback {%- endcomment -%}
+        <div class="corporate__card card fade-up corporate__card--silver">
+          <span class="corporate__icon">🥈</span>
+          <h3 class="corporate__name">Silver Partner</h3>
+          <p class="corporate__range">$1,000–$4,999</p>
+          <p class="corporate__desc">Fund dozens of rides and gain brand visibility across our digital platforms.</p>
+          <ul class="corporate__perks">
+            <li><span class="corporate__check">✓</span> Logo on ChemoCabs.org</li>
+            <li><span class="corporate__check">✓</span> Social media acknowledgement</li>
+            <li><span class="corporate__check">✓</span> Digital Partner Badge</li>
+          </ul>
+          <a href="mailto:info@chemocabs.org" class="btn btn-full btn-outline">Become a Silver Partner</a>
+        </div>
+        <div class="corporate__card card fade-up corporate__card--gold">
+          <span class="corporate__badge">★ MOST IMPACT</span>
+          <span class="corporate__icon">🥇</span>
+          <h3 class="corporate__name">Gold Partner</h3>
+          <p class="corporate__range">$5,000–$24,999</p>
+          <p class="corporate__desc">Fund hundreds of rides with premium brand placement at all Chemo Cabs events.</p>
+          <ul class="corporate__perks">
+            <li><span class="corporate__check">✓</span> Everything in Silver</li>
+            <li><span class="corporate__check">✓</span> Featured logo placement</li>
+            <li><span class="corporate__check">✓</span> VIP gala table (4 seats)</li>
+          </ul>
+          <a href="mailto:info@chemocabs.org" class="btn btn-full btn-pink">Become a Gold Partner</a>
+        </div>
+        <div class="corporate__card card fade-up corporate__card--platinum">
+          <span class="corporate__icon">💎</span>
+          <h3 class="corporate__name">Platinum Partner</h3>
+          <p class="corporate__range">$25,000+</p>
+          <p class="corporate__desc">Title-level sponsorship with naming rights, national media, and ultimate brand placement.</p>
+          <ul class="corporate__perks">
+            <li><span class="corporate__check">✓</span> Everything in Gold</li>
+            <li><span class="corporate__check">✓</span> Your logo on the Pink '57 Bel Air</li>
+            <li><span class="corporate__check">✓</span> Dedicated partnership manager</li>
+          </ul>
+          <a href="mailto:info@chemocabs.org" class="btn btn-full btn-outline">Become a Platinum Partner</a>
+        </div>
+      {%- endif -%}
     </div>
+
 
     {% if section.settings.show_logos %}
       <div class="corporate__logos fade-up">
