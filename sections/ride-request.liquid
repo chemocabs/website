@@ -1,0 +1,131 @@
+<section class="ride-request" id="ride-request" aria-labelledby="ride-heading">
+  <div class="ride-request__orbs" aria-hidden="true">
+    <div class="ride-request__orb ride-request__orb--1"></div>
+    <div class="ride-request__orb ride-request__orb--2"></div>
+  </div>
+  <div class="container" style="position: relative; z-index: 2;">
+    <!-- Success State -->
+    <div id="ride-success" class="ride-request__success" style="display: none;">
+      <div class="ride-request__success-icon">✅</div>
+      <h2>Thank you!</h2>
+      <p>We'll be in touch within 24 hours to confirm your ride.</p>
+      <p class="ride-request__success-sub">You are not alone. 🩷</p>
+    </div>
+
+    <div class="ride-request__grid" id="ride-grid">
+      <div class="ride-request__info">
+        <h2 class="ride-request__heading" id="ride-heading">
+          {{ section.settings.heading }}
+        </h2>
+        <p class="ride-request__body">
+          {{ section.settings.subheading }}
+        </p>
+        <ul class="ride-request__features">
+          {%- for block in section.blocks -%}
+            {% if block.type == 'feature' %}
+              <li>{{ block.settings.text }}</li>
+            {% endif %}
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      <div class="ride-request__form-card">
+        <h3 class="ride-request__form-title">Request Your Free Ride</h3>
+        <p class="ride-request__form-sub">We'll confirm within 24 hours.</p>
+
+        <form id="ride-form" noValidate>
+          <div class="form-group">
+            <label class="form-label">Full Name *</label>
+            <input name="name" class="form-input form-input-dark" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="color: rgba(255,255,255,0.9)">Email *</label>
+            <input name="email" type="email" class="form-input form-input-dark" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="color: rgba(255,255,255,0.9)">Phone *</label>
+            <input name="phone" type="tel" class="form-input form-input-dark" placeholder="(555) 123-4567" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="color: rgba(255,255,255,0.9)">City / Province *</label>
+            <input name="city" class="form-input form-input-dark" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="color: rgba(255,255,255,0.9)">Treatment Facility *</label>
+            <input name="facility" class="form-input form-input-dark" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="color: rgba(255,255,255,0.9)">Next Appointment Date *</label>
+            <input name="date" type="date" class="form-input form-input-dark" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="color: rgba(255,255,255,0.9)">Ride Preference</label>
+            <select name="preference" class="form-input form-input-dark">
+              <option value="no-preference">No Preference</option>
+              <option value="volunteer">Volunteer Driver</option>
+              <option value="rideshare">Rideshare (Uber/Lyft/Hopp)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="color: rgba(255,255,255,0.9)">Notes</label>
+            <textarea name="notes" class="form-input form-input-dark" rows="3" placeholder="Optional"></textarea>
+          </div>
+          <button type="submit" id="ride-submit" class="btn btn-pink btn-lg btn-full">
+            Submit Ride Request →
+          </button>
+          <p class="ride-request__secure">🔒 Your information is confidential and secure.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ride Request",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "You Focus on Getting Better. We'll Handle the Ride." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Whether it's chemo, radiation, or surgery — submit a request and we'll take care of the rest." }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature List Item",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Feature Text", "default": "🚗 Volunteer drivers or rideshare" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ride Request",
+      "blocks": [
+        { "type": "feature", "settings": { "text": "🚗 Volunteer drivers or rideshare — your choice" } },
+        { "type": "feature", "settings": { "text": "💰 Always 100% free for patients" } },
+        { "type": "feature", "settings": { "text": "🏥 Rides to any cancer treatment facility in Canada" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('ride-form');
+    const grid = document.getElementById('ride-grid');
+    const success = document.getElementById('ride-success');
+    const submitBtn = document.getElementById('ride-submit');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      submitBtn.textContent = 'Submitting...';
+      submitBtn.disabled = true;
+      
+      setTimeout(() => {
+        grid.style.display = 'none';
+        success.style.display = 'block';
+        success.scrollIntoView({ behavior: 'smooth' });
+      }, 1500);
+    });
+  });
+</script>

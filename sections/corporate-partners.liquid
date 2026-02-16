@@ -1,0 +1,159 @@
+<section class="corporate" id="corporate" aria-labelledby="corporate-heading">
+  <div class="corporate__orbs" aria-hidden="true">
+    <div class="corporate__orb corporate__orb--1"></div>
+    <div class="corporate__orb corporate__orb--2"></div>
+  </div>
+  <div class="container" style="position: relative; z-index: 2;">
+    <div class="text-center fade-up">
+      <p class="section-label">CORPORATE PARTNERSHIPS</p>
+      <h2 class="section-heading" id="corporate-heading" style="color: #fff">{{ section.settings.heading }}</h2>
+      <div class="section-subheading" style="color: rgba(255,255,255,0.7)">
+        {{ section.settings.subheading }}
+      </div>
+      <p class="corporate__selling-point fade-up">
+        {{ section.settings.selling_point }}
+      </p>
+    </div>
+
+    <div class="corporate__grid stagger-children">
+      {%- for block in section.blocks -%}
+        {% if block.type == 'tier' %}
+          <div class="corporate__card card fade-up corporate__card--{{ block.settings.style }}" {{ block.shopify_attributes }}>
+            {% if block.settings.badge != blank %}
+              <span class="corporate__badge">{{ block.settings.badge }}</span>
+            {% endif %}
+            <span class="corporate__icon">{{ block.settings.icon }}</span>
+            <h3 class="corporate__name">{{ block.settings.name }}</h3>
+            <p class="corporate__range">{{ block.settings.range }}</p>
+            <p class="corporate__desc">{{ block.settings.description }}</p>
+            <ul class="corporate__perks">
+              {% assign perks = block.settings.perks | split: ';' %}
+              {% for perk in perks %}
+                <li><span class="corporate__check">✓</span> {{ perk | strip }}</li>
+              {% endfor %}
+            </ul>
+            <a href="mailto:{{ section.settings.contact_email }}" class="btn btn-full {% if block.settings.style == 'gold' %}btn-pink{% else %}btn-outline{% endif %}">
+              {{ block.settings.cta }}
+            </a>
+          </div>
+        {% endif %}
+      {%- endfor -%}
+    </div>
+
+    {% if section.settings.show_logos %}
+      <div class="corporate__logos fade-up">
+        <h3 class="corporate__logos-title">{{ section.settings.logos_title }}</h3>
+        <div class="corporate__logos-grid">
+          {%- for block in section.blocks -%}
+            {% if block.type == 'partner_logo' %}
+              <div class="corporate__logo-placeholder" {{ block.shopify_attributes }}>
+                {% if block.settings.image != blank %}
+                  {{ block.settings.image | image_url: width: 300 | image_tag: loading: 'lazy' }}
+                {% else %}
+                  {{ block.settings.partner_name }}
+                {% endif %}
+              </div>
+            {% endif %}
+          {%- endfor -%}
+          {% if section.blocks.size == 0 %}
+            <div class="corporate__logo-placeholder">Your Logo Here</div>
+          {% endif %}
+        </div>
+        <p class="corporate__logos-sub">{{ section.settings.logos_sub }}</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Corporate Partners",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Align Your Brand With a Movement"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Chemo Cabs corporate partners don't just write cheques — they join a visible, high-impact movement."
+    },
+    {
+      "type": "textarea",
+      "id": "selling_point",
+      "label": "Selling Point",
+      "default": "Our partners receive year-round brand visibility across events, media, social channels, and more."
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "Contact Email",
+      "default": "info@chemocabs.org"
+    },
+    {
+      "type": "header",
+      "content": "Partner Logos"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_logos",
+      "label": "Show current partners logos",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "logos_title",
+      "label": "Logos Title",
+      "default": "Current Partners"
+    },
+    {
+      "type": "text",
+      "id": "logos_sub",
+      "label": "Logos Subtext",
+      "default": "Join the growing list of organizations driving hope across Canada."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tier",
+      "name": "Partnership Tier",
+      "settings": [
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "options": [
+            { "value": "silver", "label": "Silver" },
+            { "value": "gold", "label": "Gold" },
+            { "value": "platinum", "label": "Platinum" }
+          ],
+          "default": "silver"
+        },
+        { "type": "text", "id": "badge", "label": "Badge", "default": "" },
+        { "type": "text", "id": "icon", "label": "Icon/Emoji", "default": "🥇" },
+        { "type": "text", "id": "name", "label": "Tier Name", "default": "Gold Partner" },
+        { "type": "text", "id": "range", "label": "Price Range", "default": "$5,000–$24,999" },
+        { "type": "textarea", "id": "description", "label": "Description" },
+        { "type": "textarea", "id": "perks", "label": "Perks (separate by semicolon ;)" },
+        { "type": "text", "id": "cta", "label": "CTA Text", "default": "Join Now" }
+      ]
+    },
+    {
+      "type": "partner_logo",
+      "name": "Partner Logo",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Partner Logo" },
+        { "type": "text", "id": "partner_name", "label": "Partner Name", "default": "Partner Name" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Corporate Partners"
+    }
+  ]
+}
+{% endschema %}

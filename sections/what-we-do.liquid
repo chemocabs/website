@@ -1,0 +1,87 @@
+<section class="what-we-do" id="what-we-do" aria-labelledby="what-we-do-heading">
+  <div class="container">
+    <div class="text-center fade-up">
+      <p class="section-label">WHAT WE DO</p>
+      <h2 class="section-heading" id="what-we-do-heading">{{ section.settings.heading }}</h2>
+    </div>
+    <div class="what-we-do__grid stagger-children">
+      {%- for block in section.blocks -%}
+        <div class="what-we-do__card card fade-up" {{ block.shopify_attributes }}>
+          <span class="what-we-do__icon" aria-hidden="true">{{ block.settings.icon }}</span>
+          <h3 class="what-we-do__title">{{ block.settings.title }}</h3>
+          <p class="what-we-do__desc">{{ block.settings.description }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "What We Do",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Three Ways We Drive Hope"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "service",
+      "name": "Service Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Emoji Icon",
+          "default": "🚗"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Service Name"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "What We Do",
+      "blocks": [
+        {
+          "type": "service",
+          "settings": {
+            "icon": "🚗",
+            "title": "Volunteer Drivers",
+            "description": "Compassionate community volunteers provide door-to-door rides to and from treatment centres across Canada."
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "icon": "📱",
+            "title": "Rideshare Coverage",
+            "description": "We cover Uber, Lyft, Hopp, and other rideshare costs so patients can get to treatment on their schedule."
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "icon": "🎁",
+            "title": "Comfort Bags",
+            "description": "Our Deluxe Comfort Bags are packed with oncology-recommended essentials — because care extends beyond the ride."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

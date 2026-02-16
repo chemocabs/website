@@ -1,0 +1,119 @@
+<nav class="navbar" role="navigation" aria-label="Main navigation" data-header>
+  <div class="navbar__container container">
+    <a href="/" class="navbar__logo" aria-label="Chemo Cabs Home">
+      <svg class="navbar__logo-icon" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M4,22 Q4,16 10,14 L14,6 Q16,3 20,3 L32,3 Q36,3 38,6 L42,14 Q46,16 46,20 L46,22 Q46,26 42,28 L6,28 Q4,26 4,22 Z" fill="currentColor" opacity="0.9" />
+        <circle cx="14" cy="28" r="4" fill="#0A0A0A" stroke="currentColor" stroke-width="2" />
+        <circle cx="38" cy="28" r="4" fill="#0A0A0A" stroke="currentColor" stroke-width="2" />
+        <rect x="18" y="9" width="6" height="5" rx="1" fill="#0A0A0A" opacity="0.2" />
+        <rect x="26" y="9" width="6" height="5" rx="1" fill="#0A0A0A" opacity="0.2" />
+      </svg>
+      <span class="navbar__logo-text">Chemo Cabs</span>
+    </a>
+
+    <ul class="navbar__links">
+      {% for link in section.settings.menu.links %}
+        <li><a href="{{ link.url }}">{{ link.label }}</a></li>
+      {% endfor %}
+      {% if section.settings.menu == blank %}
+        <li><a href="#problem">About</a></li>
+        <li><a href="#donate">Impact</a></li>
+        <li><a href="#donate">Donate</a></li>
+        <li><a href="#comfort-bags">Comfort Bags</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#stories">Stories</a></li>
+      {% endif %}
+    </ul>
+
+    <div class="navbar__actions">
+      <a href="#ride-request" class="btn btn-pink btn-sm">Request a Ride</a>
+      <a href="#donate" class="btn btn-outline-pink btn-sm">Donate</a>
+    </div>
+
+    <button
+      class="navbar__hamburger"
+      aria-label="Toggle navigation menu"
+      aria-expanded="false"
+      data-mobile-toggle
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile menu overlay -->
+<div class="mobile-menu" role="dialog" aria-label="Mobile navigation" data-mobile-menu>
+  <div class="mobile-menu__actions">
+    <a href="#donate" class="btn btn-pink btn-lg btn-full">Donate Now</a>
+    <a href="#ride-request" class="btn btn-outline btn-lg btn-full" style="color: #fff; border-color: #fff">Request a Ride</a>
+  </div>
+  <ul class="mobile-menu__links">
+    {% for link in section.settings.menu.links %}
+      <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+    {% endfor %}
+    {% if section.settings.menu == blank %}
+      <li><a href="#problem">About</a></li>
+      <li><a href="#donate">Impact</a></li>
+      <li><a href="#donate">Donate</a></li>
+      <li><a href="#comfort-bags">Comfort Bags</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#stories">Stories</a></li>
+    {% endif %}
+  </ul>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu"
+    }
+  ]
+}
+{% endschema %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const header = document.querySelector('[data-header]');
+    const toggle = document.querySelector('[data-mobile-toggle]');
+    const menu = document.querySelector('[data-mobile-menu]');
+    const links = document.querySelectorAll('.navbar__links a, .mobile-menu__links a, .navbar__actions a, .mobile-menu__actions a');
+
+    // Scroll effect
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('navbar--scrolled', window.scrollY > 50);
+    });
+
+    // Mobile toggle
+    toggle.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('mobile-menu--open');
+      toggle.classList.toggle('active', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    // Smooth scroll and close menu
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (href.startsWith('#')) {
+          e.preventDefault();
+          menu.classList.remove('mobile-menu--open');
+          toggle.classList.remove('active');
+          toggle.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+          
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    });
+  });
+</script>

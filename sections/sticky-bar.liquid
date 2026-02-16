@@ -1,0 +1,53 @@
+<div class="sticky-bar" id="sticky-donation-bar" data-sticky-bar>
+  <div class="container sticky-bar__container">
+    <div class="sticky-bar__content">
+      <span class="sticky-bar__icon">🩷</span>
+      <div class="sticky-bar__messages">
+        <span class="sticky-bar__message active" data-msg>Join our monthly Partners in Hope community</span>
+        <span class="sticky-bar__message" data-msg style="display: none;">$35 funds a round-trip ride for a patient</span>
+        <span class="sticky-bar__message" data-msg style="display: none;">100% of ride donations fund rides</span>
+      </div>
+    </div>
+    <div class="sticky-bar__actions">
+      <a href="#donate" class="btn btn-pink btn-sm">Donate Now</a>
+      <button class="sticky-bar__close" id="close-sticky" aria-label="Dismiss bar">×</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const bar = document.getElementById('sticky-donation-bar');
+    const closeBtn = document.getElementById('close-sticky');
+    const messages = document.querySelectorAll('[data-msg]');
+    let currentMsg = 0;
+
+    // Cycle messages
+    setInterval(() => {
+      messages[currentMsg].style.display = 'none';
+      currentMsg = (currentMsg + 1) % messages.length;
+      messages[currentMsg].style.display = 'inline';
+    }, 4000);
+
+    // Show after delay
+    setTimeout(() => {
+      bar.classList.add('visible');
+    }, 2000);
+
+    closeBtn.addEventListener('click', () => {
+      bar.style.display = 'none';
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Sticky Donation Bar",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Sticky Donation Bar"
+    }
+  ]
+}
+{% endschema %}

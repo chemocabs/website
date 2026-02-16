@@ -1,0 +1,27 @@
+[
+    {
+        "name": "theme_info",
+        "theme_name": "Chemo Cabs",
+        "theme_version": "1.0.0",
+        "theme_author": "Antigravity",
+        "theme_documentation_url": "https://github.com/chemocabs/website",
+        "theme_support_url": "https://github.com/chemocabs/website"
+    },
+    {
+        "name": "Colors",
+        "settings": [
+            {
+                "type": "color",
+                "id": "color_primary",
+                "label": "Primary Pink",
+                "default": "#E91E8C"
+            },
+            {
+                "type": "color",
+                "id": "color_bg",
+                "label": "Background",
+                "default": "#FFFFFF"
+            }
+        ]
+    }
+]

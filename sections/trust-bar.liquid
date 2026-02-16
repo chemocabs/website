@@ -1,0 +1,41 @@
+<section class="trust-bar" aria-label="Trust signals">
+  <div class="trust-bar__track">
+    <div class="trust-bar__scroll">
+      {%- comment -%} Triple loop for infinite feel on smaller screens {%- endcomment -%}
+      {%- for i in (1..3) -%}
+        <div class="trust-bar__item">
+          <span class="trust-bar__icon" aria-hidden="true">🇨🇦</span>
+          <span>Registered Canadian Charity</span>
+        </div>
+        <div class="trust-bar__item">
+          <span class="trust-bar__icon" aria-hidden="true">📋</span>
+          <span>Tax Receipts for Every Donation</span>
+        </div>
+        <div class="trust-bar__item">
+          <span class="trust-bar__icon" aria-hidden="true">💯</span>
+          <span>100% of Ride Donations Fund Rides</span>
+        </div>
+        <div class="trust-bar__item">
+          <span class="trust-bar__icon" aria-hidden="true">🤝</span>
+          <span>Volunteer-Powered Across Canada</span>
+        </div>
+        <div class="trust-bar__item">
+          <span class="trust-bar__icon" aria-hidden="true">🏥</span>
+          <span>Partnered with Treatment Centres Nationwide</span>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Trust Bar",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Trust Bar"
+    }
+  ]
+}
+{% endschema %}

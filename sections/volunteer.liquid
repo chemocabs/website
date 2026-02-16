@@ -1,0 +1,55 @@
+<section class="volunteer" id="volunteer" aria-labelledby="volunteer-heading">
+  <div class="container">
+    <div class="text-center fade-up">
+      <h2 class="section-heading" id="volunteer-heading">{{ section.settings.heading }}</h2>
+      <p class="section-subheading">
+        {{ section.settings.subheading }}
+      </p>
+    </div>
+    <div class="volunteer__roles fade-up">
+      {%- for block in section.blocks -%}
+        <div class="volunteer__pill">
+          <span>{{ block.settings.emoji }}</span> {{ block.settings.label }}
+        </div>
+      {%- endfor -%}
+    </div>
+    <div class="text-center fade-up" style="margin-bottom: 0;">
+      <a href="mailto:{{ section.settings.email }}" class="btn btn-pink btn-lg">{{ section.settings.cta_text }}</a>
+      <p class="volunteer__count">{{ section.settings.footer_text }}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Volunteer",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Drive Hope in Your Community" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Whether you can drive, fundraise, or pack Comfort Bags — there's a place for you." },
+    { "type": "text", "id": "cta_text", "label": "CTA Text", "default": "Sign Up to Volunteer" },
+    { "type": "text", "id": "email", "label": "Contact Email", "default": "info@chemocabs.org" },
+    { "type": "text", "id": "footer_text", "label": "Footer Text", "default": "Join 200+ volunteers across Canada" }
+  ],
+  "blocks": [
+    {
+      "type": "role",
+      "name": "Volunteer Role",
+      "settings": [
+        { "type": "text", "id": "emoji", "label": "Emoji", "default": "🚗" },
+        { "type": "text", "id": "label", "label": "Role Label", "default": "Driver" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Volunteer",
+      "blocks": [
+        { "type": "role", "settings": { "emoji": "🚗", "label": "Volunteer Driver" } },
+        { "type": "role", "settings": { "emoji": "📣", "label": "Community Fundraiser" } },
+        { "type": "role", "settings": { "emoji": "🎁", "label": "Comfort Bag Packer" } },
+        { "type": "role", "settings": { "emoji": "💻", "label": "Digital Ambassador" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

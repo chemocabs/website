@@ -1,0 +1,187 @@
+<section class="hero" aria-labelledby="hero-heading">
+  {/* Animated orbs */}
+  <div class="hero__orbs" aria-hidden="true">
+    <div class="hero__orb hero__orb--1"></div>
+    <div class="hero__orb hero__orb--2"></div>
+    <div class="hero__orb hero__orb--3"></div>
+  </div>
+
+  <div class="hero__container container">
+    <div class="hero__content">
+      <h1 id="hero-heading" class="hero__title">
+        <span class="gradient-text">{{ section.settings.heading_gradient }}</span>
+        <br />
+        <span>{{ section.settings.heading_solid }}</span>
+      </h1>
+      <p class="hero__tagline">{{ section.settings.tagline }}</p>
+      <p class="hero__body">
+        {{ section.settings.body_text }}
+      </p>
+      <div class="hero__ctas">
+        <a href="#donate" class="btn btn-pink btn-lg">
+          🩷 {{ section.settings.cta_primary_text }}
+        </a>
+        <a href="#ride-request" class="btn btn-outline btn-lg">
+          🚗 {{ section.settings.cta_secondary_text }}
+        </a>
+      </div>
+      <div class="hero__trust">
+        <span>100% free for patients</span>
+        <span class="hero__trust-dot">·</span>
+        <span>Canada-wide</span>
+        <span class="hero__trust-dot">·</span>
+        <span>Registered Canadian Charity</span>
+        <span class="hero__trust-dot">·</span>
+        <span>Tax receipts issued</span>
+      </div>
+    </div>
+
+    <div class="hero__visual">
+      <div class="hero__image-frame 3d-tilt" data-image-frame>
+        <div class="hero__image-glow"></div>
+        <img
+          src="{{ 'hero-car.png' | asset_url }}"
+          alt="The Pink 1957 Chevrolet Bel Air - Chemo Cabs mascot"
+          class="hero__image"
+          loading="eager"
+        >
+        <div class="hero__image-badge">
+          The Pink '57 Bel Air — Our Mascot
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* Impact counters */}
+  <div class="hero__counters" data-counters>
+    <div class="container">
+      <div class="hero__counters-grid">
+        <div class="counter-card" data-counter-card data-target="35" data-delay="0">
+          <span class="counter-card__amount" data-amount>$0</span>
+          <span class="counter-card__label">Gets a patient to their appointment</span>
+        </div>
+        <div class="counter-card" data-counter-card data-target="170" data-delay="200">
+          <span class="counter-card__amount" data-amount>$0</span>
+          <span class="counter-card__label">Delivers a Comfort Bag to a patient in treatment</span>
+        </div>
+        <div class="counter-card" data-counter-card data-target="500" data-delay="400">
+          <span class="counter-card__amount" data-amount>$0</span>
+          <span class="counter-card__label">Covers a full month of rides</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_gradient",
+      "label": "Heading Gradient Part",
+      "default": "Driving Hope"
+    },
+    {
+      "type": "text",
+      "id": "heading_solid",
+      "label": "Heading Solid Part",
+      "default": "Across Canada"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "No patient rides alone."
+    },
+    {
+      "type": "textarea",
+      "id": "body_text",
+      "label": "Body Text",
+      "default": "We provide free rides to cancer treatment for patients across Canada — through volunteer drivers, Uber, Lyft, and Hopp. Because getting to your appointment should never be a barrier to beating cancer."
+    },
+    {
+      "type": "text",
+      "id": "cta_primary_text",
+      "label": "Primary CTA Text",
+      "default": "Donate — Fund a Ride"
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary_text",
+      "label": "Secondary CTA Text",
+      "default": "Request a Free Ride"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // 3D Tilt Effect
+    const frame = document.querySelector('[data-image-frame]');
+    if (frame) {
+      frame.addEventListener('mousemove', (e) => {
+        const { left, top, width, height } = frame.getBoundingClientRect();
+        const x = (e.clientX - left) / width - 0.5;
+        const y = (e.clientY - top) / height - 0.5;
+        const tiltX = y * 20;
+        const tiltY = x * -20;
+        frame.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.02)`;
+        const glow = frame.querySelector('.hero__image-glow');
+        if (glow) {
+          glow.style.background = `radial-gradient(circle at ${e.clientX - left}px ${e.clientY - top}px, rgba(255,255,255,0.2), transparent 40%)`;
+        }
+      });
+      frame.addEventListener('mouseleave', () => {
+        frame.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+        const glow = frame.querySelector('.hero__image-glow');
+        if (glow) glow.style.background = 'transparent';
+      });
+    }
+
+    // Counters
+    const countersSection = document.querySelector('[data-counters]');
+    const counterCards = document.querySelectorAll('[data-counter-card]');
+    
+    const animateCounter = (card) => {
+      const amountEl = card.querySelector('[data-amount]');
+      const target = parseInt(card.dataset.target);
+      const delay = parseInt(card.dataset.delay);
+      
+      setTimeout(() => {
+        let startTime = null;
+        const duration = 1500;
+        
+        function step(timestamp) {
+          if (!startTime) startTime = timestamp;
+          const progress = Math.min((timestamp - startTime) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          amountEl.textContent = `$${Math.round(eased * target)}`;
+          if (progress < 1) {
+            window.requestAnimationFrame(step);
+          }
+        }
+        window.requestAnimationFrame(step);
+      }, delay);
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          counterCards.forEach(card => animateCounter(card));
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    if (countersSection) observer.observe(countersSection);
+  });
+</script>

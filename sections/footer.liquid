@@ -1,0 +1,79 @@
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__grid">
+      <!-- Column 1: Brand -->
+      <div class="footer__col footer__brand">
+        <a href="/" class="navbar__logo" style="margin-bottom: 24px;">
+          <svg class="navbar__logo-icon" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4,22 Q4,16 10,14 L14,6 Q16,3 20,3 L32,3 Q36,3 38,6 L42,14 Q46,16 46,20 L46,22 Q46,26 42,28 L6,28 Q4,26 4,22 Z" fill="#E91E8C" />
+          </svg>
+          <span class="navbar__logo-text" style="color: #fff">Chemo Cabs</span>
+        </a>
+        <p class="footer__desc">
+          No patient rides alone. We provide free transportation to cancer treatment for patients across Canada through a dedicated network of volunteers and rideshare partners.
+        </p>
+        <div class="footer__social">
+          <a href="#" aria-label="Facebook">FB</a>
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="LinkedIn">LN</a>
+          <a href="#" aria-label="Twitter">TW</a>
+        </div>
+      </div>
+
+      <!-- Column 2,3,4: Links -->
+      {%- for block in section.blocks -%}
+        {% if block.type == 'link_list' %}
+          <div class="footer__col">
+            <h4 class="footer__title">{{ block.settings.title }}</h4>
+            <ul class="footer__links">
+              {% for link in block.settings.menu.links %}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      {%- endfor -%}
+    </div>
+
+    <!-- Bottom Row -->
+    <div class="footer__bottom">
+      <div class="footer__copyright">
+        © {{ 'now' | date: "%Y" }} Chemo Cabs. Registered Canadian Charity #730332857RR0001. All rights reserved.
+      </div>
+      <div class="footer__legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Tax Receipt Info</a>
+      </div>
+    </div>
+
+    <!-- Trust Seals -->
+    <div class="footer__trust-row">
+      <span>🔒 Secure Data</span>
+      <span>💳 Powered by Stripe</span>
+      <span>🇨🇦 100% Canadian</span>
+      <span>🎗️ Volunteer Powered</span>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "blocks": [
+    {
+      "type": "link_list",
+      "name": "Menu",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Quick Links" },
+        { "type": "link_list", "id": "menu", "label": "Menu" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer"
+    }
+  ]
+}
+{% endschema %}

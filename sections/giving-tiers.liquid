@@ -1,0 +1,122 @@
+<section class="giving-tiers" aria-labelledby="tiers-heading">
+  <div class="container">
+    <div class="text-center fade-up">
+      <h2 class="section-heading" id="tiers-heading">{{ section.settings.heading }}</h2>
+      <p class="section-subheading">
+        {{ section.settings.subheading }}
+      </p>
+    </div>
+    <div class="giving-tiers__grid stagger-children">
+      {%- for block in section.blocks -%}
+        <div class="giving-tiers__card card fade-up giving-tiers__card--{{ block.settings.style }}" {{ block.shopify_attributes }}>
+          {% if block.settings.badge != blank %}
+            <span class="giving-tiers__badge badge badge-pink">{{ block.settings.badge }}</span>
+          {% endif %}
+          <span class="giving-tiers__emoji">{{ block.settings.emoji }}</span>
+          <h3 class="giving-tiers__name">{{ block.settings.name }}</h3>
+          <p class="giving-tiers__range">{{ block.settings.range }}</p>
+          <p class="giving-tiers__desc">{{ block.settings.description }}</p>
+          <ul class="giving-tiers__perks">
+            {% assign perks = block.settings.perks | split: ';' %}
+            {% for perk in perks %}
+              <li><span class="giving-tiers__check">✓</span> {{ perk | strip }}</li>
+            {% endfor %}
+          </ul>
+          <a href="#donate" class="btn {% if block.settings.style == 'featured' %}btn-pink{% else %}btn-outline-pink{% endif %} btn-full">
+            {{ block.settings.cta }}
+          </a>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Giving Tiers",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Join Our Community of Supporters"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Every tier includes a tax receipt and our heartfelt gratitude."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tier",
+      "name": "Giving Tier",
+      "settings": [
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Card Style",
+          "options": [
+            { "value": "default", "label": "Default" },
+            { "value": "featured", "label": "Featured (Pink Glow)" },
+            { "value": "premium", "label": "Premium (Dark)" }
+          ],
+          "default": "default"
+        },
+        { "type": "text", "id": "badge", "label": "Badge", "default": "" },
+        { "type": "text", "id": "emoji", "label": "Emoji", "default": "💛" },
+        { "type": "text", "id": "name", "label": "Tier Name", "default": "Hope Giver" },
+        { "type": "text", "id": "range", "label": "Price Range", "default": "$25–$99/month" },
+        { "type": "textarea", "id": "description", "label": "Description" },
+        { "type": "textarea", "id": "perks", "label": "Perks (separate by semicolon ;)" },
+        { "type": "text", "id": "cta", "label": "CTA Text", "default": "Join Now" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Giving Tiers",
+      "blocks": [
+        {
+          "type": "tier",
+          "settings": {
+            "style": "default",
+            "emoji": "💛",
+            "name": "Hope Giver",
+            "range": "$25–$99/month",
+            "description": "Cover round-trip rides for patients in your community.",
+            "perks": "Tax receipt; Welcome email & update; Name on Donor Wall",
+            "cta": "Become a Hope Giver"
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "style": "featured",
+            "badge": "★ MOST POPULAR",
+            "emoji": "💖",
+            "name": "Care Champion",
+            "range": "$100–$499",
+            "description": "Fund a week of rides and deliver a Comfort Bag.",
+            "perks": "Everything in Hope Giver; Personal thank-you; Social media recognition",
+            "cta": "Become a Care Champion"
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "style": "premium",
+            "emoji": "🌟",
+            "name": "Driving Force",
+            "range": "$500+",
+            "description": "Cover a full month of treatment transportation.",
+            "perks": "Everything in Care Champion; Patient story; Gala invitation; Pin & Certificate",
+            "cta": "Become a Driving Force"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

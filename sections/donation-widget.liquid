@@ -1,0 +1,207 @@
+<section class="donation" id="donate" aria-labelledby="donate-heading">
+  <div class="container">
+    <div class="text-center fade-up">
+      <p class="section-label">MAKE A DIFFERENCE TODAY</p>
+      <h2 class="section-heading" id="donate-heading">{{ section.settings.heading }}</h2>
+      <p class="section-subheading">
+        {{ section.settings.subheading }}
+      </p>
+    </div>
+
+    <!-- Success State (Hidden by default) -->
+    <div id="donation-success" class="donation__success" style="display: none;">
+      <div class="donation__success-icon">✅</div>
+      <h2>Thank You for Your Generosity!</h2>
+      <p>Your donation will directly fund rides for cancer patients across Canada.</p>
+      <p>A tax receipt has been emailed to you.</p>
+      <p class="donation__success-sub">You are a part of something incredible. 🩷</p>
+    </div>
+
+    <!-- Donation Form -->
+    <form id="donation-form" class="donation__card card fade-up" noValidate>
+      <div class="donation__toggle">
+        <button type="button" class="donation__toggle-btn" data-freq="one-time">One-Time</button>
+        <button type="button" class="donation__toggle-btn active" data-freq="monthly">
+          Monthly
+          <span class="badge badge-pink" style="margin-left: 8px; font-size: 0.65rem;">RECOMMENDED</span>
+        </button>
+      </div>
+      <p class="donation__monthly-note" id="monthly-note">💖 Partners in Hope give monthly — it helps us plan ahead</p>
+
+      <div class="donation__amounts">
+        <button type="button" class="donation__amount-btn" data-val="35">
+          <span class="donation__amount-icon">🚗</span>
+          <span class="donation__amount-value">$35</span>
+          <span class="donation__amount-label">One round-trip ride</span>
+        </button>
+        <button type="button" class="donation__amount-btn" data-val="75">
+          <span class="donation__amount-icon">🎒</span>
+          <span class="donation__amount-value">$75</span>
+          <span class="donation__amount-label">Two rides + snack pack</span>
+        </button>
+        <button type="button" class="donation__amount-btn active featured" data-val="170">
+          <span class="donation__amount-badge">MOST CHOSEN</span>
+          <span class="donation__amount-icon">🎁</span>
+          <span class="donation__amount-value">$170</span>
+          <span class="donation__amount-label">One Deluxe Comfort Bag</span>
+        </button>
+        <button type="button" class="donation__amount-btn" data-val="500">
+          <span class="donation__amount-icon">📅</span>
+          <span class="donation__amount-value">$500</span>
+          <span class="donation__amount-label">Full month of rides</span>
+        </button>
+        <div class="donation__amount-btn donation__custom" id="custom-btn">
+          <span class="donation__amount-icon">✨</span>
+          <span class="donation__amount-value">Custom</span>
+          <div class="donation__custom-input-wrap">
+            <span class="donation__custom-prefix">$</span>
+            <input type="number" id="custom-amount" class="donation__custom-input" placeholder="Amount" min="1">
+          </div>
+        </div>
+      </div>
+
+      <div class="donation__dedication">
+        <label class="donation__dedication-toggle">
+          <input type="checkbox" id="dedication-checkbox">
+          <span>Make this gift in honour or memory of someone</span>
+        </label>
+        <div id="dedication-fields" style="display: none; margin-top: 15px;">
+          <div class="form-group">
+            <input type="text" class="form-input" placeholder="Their name">
+          </div>
+          <div class="form-group">
+            <textarea class="form-input" placeholder="A short message (optional)" rows="2"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="donation__fields">
+        <div class="form-group">
+          <label class="form-label">Full Name *</label>
+          <input type="text" id="donor-name" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email *</label>
+          <input type="email" id="donor-email" class="form-input" required>
+        </div>
+      </div>
+
+      <button type="submit" id="submit-btn" class="btn btn-pink btn-lg btn-full">
+        Donate $170/month Now →
+      </button>
+
+      <div class="donation__secure">
+        <p>🔒 Secure · Tax receipt emailed instantly · Powered by Stripe</p>
+        <p class="donation__secure-small">Chemo Cabs is a registered Canadian charity.</p>
+      </div>
+    </form>
+
+    <div class="donation__impact stagger-children">
+      <div class="donation__impact-card fade-up">
+        <span class="donation__impact-icon">🚗</span>
+        <span class="donation__impact-num">142</span>
+        <span class="donation__impact-label">Rides Funded This Month</span>
+      </div>
+      <div class="donation__impact-card fade-up">
+        <span class="donation__impact-icon">🎁</span>
+        <span class="donation__impact-num">67</span>
+        <span class="donation__impact-label">Comfort Bags Delivered</span>
+      </div>
+      <div class="donation__impact-card fade-up">
+        <span class="donation__impact-icon">💛</span>
+        <span class="donation__impact-num">318</span>
+        <span class="donation__impact-label">Donors This Month</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Donation Widget",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your Donation Gets Patients to Treatment"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Choose how you want to help — every dollar has a direct, tangible impact."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Donation Widget"
+    }
+  ]
+}
+{% endschema %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('donation-form');
+    const successDiv = document.getElementById('donation-success');
+    const freqBtns = document.querySelectorAll('[data-freq]');
+    const amtBtns = document.querySelectorAll('[data-val]');
+    const customBtn = document.getElementById('custom-btn');
+    const customInput = document.getElementById('custom-amount');
+    const dedicationCheck = document.getElementById('dedication-checkbox');
+    const dedicationFields = document.getElementById('dedication-fields');
+    const submitBtn = document.getElementById('submit-btn');
+    const monthlyNote = document.getElementById('monthly-note');
+
+    let frequency = 'monthly';
+    let amount = 170;
+
+    function updateUI() {
+      freqBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.freq === frequency));
+      amtBtns.forEach(btn => btn.classList.toggle('active', !customInput.value && parseInt(btn.dataset.val) === amount));
+      customBtn.classList.toggle('active', !!customInput.value);
+      monthlyNote.style.display = frequency === 'monthly' ? 'block' : 'none';
+      
+      const displayAmt = customInput.value || amount;
+      submitBtn.textContent = `Donate $${displayAmt}${frequency === 'monthly' ? '/month' : ''} Now →`;
+    }
+
+    freqBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        frequency = btn.dataset.freq;
+        updateUI();
+      });
+    });
+
+    amtBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        amount = parseInt(btn.dataset.val);
+        customInput.value = '';
+        updateUI();
+      });
+    });
+
+    customInput.addEventListener('input', () => {
+      updateUI();
+    });
+
+    dedicationCheck.addEventListener('change', () => {
+      dedicationFields.style.display = dedicationCheck.checked ? 'block' : 'none';
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      submitBtn.textContent = 'Processing...';
+      submitBtn.disabled = true;
+      
+      setTimeout(() => {
+        form.style.display = 'none';
+        successDiv.style.display = 'block';
+        successDiv.scrollIntoView({ behavior: 'smooth' });
+      }, 1500);
+    });
+
+    updateUI();
+  });
+</script>

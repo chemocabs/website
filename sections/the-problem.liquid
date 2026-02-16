@@ -1,0 +1,74 @@
+<section class="the-problem" id="problem" aria-labelledby="problem-heading">
+  <div class="container">
+    <div class="text-center fade-up">
+      <p class="section-label">THE PROBLEM</p>
+      <h2 class="section-heading" id="problem-heading">{{ section.settings.heading }}</h2>
+      <div class="section-subheading">
+        {{ section.settings.body_text }}
+      </div>
+    </div>
+    <div class="the-problem__stats stagger-children">
+      {%- for block in section.blocks -%}
+        <div class="the-problem__stat card-dark fade-up" {{ block.shopify_attributes }}>
+          <span class="the-problem__value">{{ block.settings.value }}</span>
+          <span class="the-problem__label">{{ block.settings.label }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+    <div class="text-center fade-up" style="margin-top: 40px; margin-bottom: 0;">
+      <a href="#donate" class="the-problem__cta">
+        Help us change these numbers →
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "The Problem",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Cancer Doesn't Wait. Neither Should a Ride."
+    },
+    {
+      "type": "richtext",
+      "id": "body_text",
+      "label": "Body Text"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Stat Value",
+          "default": "3.6M"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Stat Label",
+          "default": "Canadians face barriers"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "The Problem",
+      "blocks": [
+        { "type": "stat", "settings": { "value": "3.6M", "label": "Canadians face barriers accessing healthcare" } },
+        { "type": "stat", "settings": { "value": "42%", "label": "Of cancer patients report transportation as a top concern" } },
+        { "type": "stat", "settings": { "value": "1 in 4", "label": "Patients delay treatment due to lack of transport" } },
+        { "type": "stat", "settings": { "value": "$0", "label": "What patients pay for a Chemo Cabs ride — always" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

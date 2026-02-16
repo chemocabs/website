@@ -1,0 +1,53 @@
+<section class="stories" id="stories" aria-labelledby="stories-heading">
+  <div class="container">
+    <div class="text-center fade-up">
+      <p class="section-label">PATIENT STORIES</p>
+      <h2 class="section-heading" id="stories-heading">{{ section.settings.heading }}</h2>
+      <p class="section-subheading">
+        {{ section.settings.subheading }}
+      </p>
+    </div>
+    <div class="stories__grid stagger-children">
+      {%- for block in section.blocks -%}
+        <div class="stories__card card fade-up" {{ block.shopify_attributes }}>
+          <span class="stories__quote-mark" aria-hidden="true">"</span>
+          <blockquote class="stories__quote">{{ block.settings.quote }}</blockquote>
+          <div class="stories__author">
+            <p class="stories__name">{{ block.settings.name }}</p>
+            <p class="stories__detail">{{ block.settings.detail }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Voices of Hope" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Real stories from patients who got the rides they needed." }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Quote" },
+        { "type": "text", "id": "name", "label": "Author Name" },
+        { "type": "text", "id": "detail", "label": "Author Detail (Location/Diagnosis)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        { "type": "testimonial", "settings": { "name": "Sarah M.", "detail": "Breast cancer patient, Toronto", "quote": "I was so scared about how I'd get to chemo. Chemo Cabs lifted that weight off my shoulders." } },
+        { "type": "testimonial", "settings": { "name": "Maria L.", "detail": "Leukemia patient, Vancouver", "quote": "My volunteer driver showed up with a smile every single time. That kindness carried me through." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
