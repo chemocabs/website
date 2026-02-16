@@ -7,30 +7,36 @@
         {{ section.settings.body_text }}
       </div>
     </div>
-    <div class="problem__stats stagger-children">
+
+    <div class="the-problem__stats stagger-children">
       {%- if section.blocks.size > 0 -%}
         {%- for block in section.blocks -%}
-          <div class="problem__stat-card fade-up" {{ block.shopify_attributes }}>
-            <span class="problem__stat-value">{{ block.settings.value }}</span>
-            <span class="problem__stat-label">{{ block.settings.label }}</span>
+          <div class="the-problem__stat card fade-up" {{ block.shopify_attributes }}>
+            <span class="the-problem__value">{{ block.settings.value }}</span>
+            <span class="the-problem__label">{{ block.settings.label }}</span>
           </div>
         {%- endfor -%}
       {%- else -%}
         {%- comment -%} Default Content Fallback {%- endcomment -%}
-        <div class="problem__stat-card fade-up">
-          <span class="problem__stat-value">1 in 2</span>
-          <span class="problem__stat-label">Canadians will face a cancer diagnosis in their lifetime</span>
+        <div class="the-problem__stat fade-up">
+          <span class="the-problem__value">1 in 2</span>
+          <span class="the-problem__label">Canadians will face a cancer diagnosis in their lifetime</span>
         </div>
-        <div class="problem__stat-card fade-up">
-          <span class="problem__stat-value">20%</span>
-          <span class="problem__stat-label">of patients miss or delay treatment due to transportation issues</span>
+        <div class="the-problem__stat fade-up">
+          <span class="the-problem__value">20%</span>
+          <span class="the-problem__label">of patients miss or delay treatment due to transportation issues</span>
         </div>
-        <div class="problem__stat-card fade-up">
-          <span class="problem__stat-value">10M+ km</span>
-          <span class="problem__stat-label">of travel required annually for cancer care in Canada</span>
+        <div class="the-problem__stat fade-up">
+          <span class="the-problem__value">10M+ km</span>
+          <span class="the-problem__label">of travel required annually for cancer care in Canada</span>
+        </div>
+        <div class="the-problem__stat fade-up">
+          <span class="the-problem__value">$0</span>
+          <span class="the-problem__label">What patients pay for a Chemo Cabs ride — always</span>
         </div>
       {%- endif -%}
     </div>
+
     <div class="text-center fade-up" style="margin-top: 40px; margin-bottom: 0;">
       <a href="#donate" class="the-problem__cta">
         Help us change these numbers →
