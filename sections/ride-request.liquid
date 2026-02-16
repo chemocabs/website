@@ -63,6 +63,9 @@
             if form_blocks == nil
               assign form_blocks = section.blocks | where: "type", "html_block" | first
             endif
+            if form_blocks == nil
+              assign form_blocks = section.blocks | where: "type", "@app" | first
+            endif
           -%}
 
           {%- if form_blocks -%}
@@ -102,6 +105,8 @@
                   <div class="form-group" {{ block.shopify_attributes }}>
                     {{ block.settings.html }}
                   </div>
+                {%- when '@app' -%}
+                  {% render block %}
               {%- endcase -%}
             {%- endfor -%}
           {%- else -%}
@@ -218,6 +223,9 @@
       "settings": [
         { "type": "html", "id": "html", "label": "HTML Code" }
       ]
+    },
+    {
+      "type": "@app"
     }
   ],
   "presets": [
