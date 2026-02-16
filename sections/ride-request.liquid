@@ -21,11 +21,9 @@
           {{ section.settings.subheading }}
         </p>
         <ul class="ride-request__features">
-          {%- for block in section.blocks -%}
-            {% if block.type == 'feature' %}
-              <li>{{ block.settings.text }}</li>
-            {% endif %}
-          {%- endfor -%}
+          {%- if section.settings.feature_1 != blank -%}<li>{{ section.settings.feature_1 }}</li>{%- endif -%}
+          {%- if section.settings.feature_2 != blank -%}<li>{{ section.settings.feature_2 }}</li>{%- endif -%}
+          {%- if section.settings.feature_3 != blank -%}<li>{{ section.settings.feature_3 }}</li>{%- endif -%}
         </ul>
 
         <div class="ride-request__coverage card">
@@ -41,107 +39,10 @@
       </div>
 
       <div class="ride-request__form-card">
-        {%- liquid
-          assign has_app_block = false
-          assign has_form_inputs = false
-          for block in section.blocks
-            if block.type == '@app'
-              assign has_app_block = true
-            elsif block.type == 'text_input' or block.type == 'email_input' or block.type == 'tel_input' or block.type == 'textarea_input'
-              assign has_form_inputs = true
-            endif
-          endfor
-        -%}
-
         <div class="ride-request__form-content">
           {%- for block in section.blocks -%}
-            {%- case block.type -%}
-              {%- when '@app' -%}
-                {% render block %}
-              
-              {%- when 'heading' -%}
-                <h3 class="ride-request__form-title" {{ block.shopify_attributes }}>{{ block.settings.text }}</h3>
-              
-              {%- when 'rich_text' -%}
-                <div class="ride-request__form-text" {{ block.shopify_attributes }}>
-                  {{ block.settings.text }}
-                </div>
-
-              {%- when 'html_block' -%}
-                <div class="ride-request__form-html" {{ block.shopify_attributes }}>
-                  {{ block.settings.html }}
-                </div>
-            {%- endcase -%}
+            {% render block %}
           {%- endfor -%}
-
-          {%- comment -%} Render Custom Form if inputs exist or as fallback if no app block/inputs {%- endcomment -%}
-          {%- if has_form_inputs or has_app_block == false -%}
-            <form id="ride-form" noValidate>
-              <div class="ride-request__form-body">
-                {%- if has_form_inputs -%}
-                  {%- for block in section.blocks -%}
-                    {%- case block.type -%}
-                      {%- when 'text_input' -%}
-                        <div class="form-group" {{ block.shopify_attributes }}>
-                          <label class="form-label">{{ block.settings.label }}{% if block.settings.required %} *{% endif %}</label>
-                          <input name="{{ block.settings.label | handleize }}" type="text" class="form-input form-input-dark" {% if block.settings.required %}required{% endif %} placeholder="{{ block.settings.placeholder }}">
-                        </div>
-                      {%- when 'email_input' -%}
-                        <div class="form-group" {{ block.shopify_attributes }}>
-                          <label class="form-label">{{ block.settings.label }}{% if block.settings.required %} *{% endif %}</label>
-                          <input name="email" type="email" class="form-input form-input-dark" {% if block.settings.required %}required{% endif %} placeholder="{{ block.settings.placeholder }}">
-                        </div>
-                      {%- when 'tel_input' -%}
-                        <div class="form-group" {{ block.shopify_attributes }}>
-                          <label class="form-label">{{ block.settings.label }}{% if block.settings.required %} *{% endif %}</label>
-                          <input name="phone" type="tel" class="form-input form-input-dark" {% if block.settings.required %}required{% endif %} placeholder="{{ block.settings.placeholder }}">
-                        </div>
-                      {%- when 'textarea_input' -%}
-                        <div class="form-group" {{ block.shopify_attributes }}>
-                          <label class="form-label">{{ block.settings.label }}</label>
-                          <textarea name="{{ block.settings.label | handleize }}" class="form-input form-input-dark" rows="3" placeholder="{{ block.settings.placeholder }}"></textarea>
-                        </div>
-                    {%- endcase -%}
-                  {%- endfor -%}
-                {%- else -%}
-                  {%- comment -%} Default Form Fallback {%- endcomment -%}
-                  <div class="form-group">
-                    <label class="form-label">Full Name *</label>
-                    <input name="name" class="form-input form-input-dark" required>
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label">Email *</label>
-                    <input name="email" type="email" class="form-input form-input-dark" required>
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label">Phone *</label>
-                    <input name="phone" type="tel" class="form-input form-input-dark" placeholder="(555) 123-4567" required>
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label">City / Province *</label>
-                    <input name="city" class="form-input form-input-dark" required>
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label">Treatment Facility *</label>
-                    <input name="facility" class="form-input form-input-dark" required>
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label">Next Appointment Date *</label>
-                    <input name="date" type="date" class="form-input form-input-dark" required>
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label">Notes</label>
-                    <textarea name="notes" class="form-input form-input-dark" rows="3" placeholder="Optional"></textarea>
-                  </div>
-                {%- endif -%}
-              </div>
-
-              <button type="submit" id="ride-submit" class="btn btn-pink btn-lg btn-full" style="margin-top: 24px;">
-                Submit Ride Request →
-              </button>
-              <p class="ride-request__secure">🔒 Your information is confidential and secure.</p>
-            </form>
-          {%- endif -%}
         </div>
       </div>
     </div>
@@ -153,74 +54,15 @@
   "name": "Ride Request",
   "settings": [
     { "type": "text", "id": "heading", "label": "Heading", "default": "You Focus on Getting Better. We'll Handle the Ride." },
-    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Whether it's chemo, radiation, or surgery - submit a request and we'll take care of the rest." }
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Whether it's chemo, radiation, or surgery - submit a request and we'll take care of the rest." },
+    { "type": "header", "content": "Feature List" },
+    { "type": "text", "id": "feature_1", "label": "Feature 1", "default": "🚗 Volunteer drivers or rideshare - your choice" },
+    { "type": "text", "id": "feature_2", "label": "Feature 2", "default": "💰 Always 100% free for patients" },
+    { "type": "text", "id": "feature_3", "label": "Feature 3", "default": "🏥 Rides to any cancer treatment facility in Canada" }
   ],
   "blocks": [
     {
       "type": "@app"
-    },
-    {
-      "type": "feature",
-      "name": "Feature List Item",
-      "settings": [
-        { "type": "text", "id": "text", "label": "Feature Text", "default": "🚗 Volunteer drivers or rideshare" }
-      ]
-    },
-    {
-      "type": "heading",
-      "name": "Section Heading",
-      "settings": [
-        { "type": "text", "id": "text", "label": "Heading", "default": "Request Your Free Ride" }
-      ]
-    },
-    {
-      "type": "rich_text",
-      "name": "Rich Text",
-      "settings": [
-        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>We'll confirm within 24 hours.</p>" }
-      ]
-    },
-    {
-      "type": "text_input",
-      "name": "Text Input",
-      "settings": [
-        { "type": "text", "id": "label", "label": "Label", "default": "Full Name" },
-        { "type": "text", "id": "placeholder", "label": "Placeholder" },
-        { "type": "checkbox", "id": "required", "label": "Required", "default": true }
-      ]
-    },
-    {
-      "type": "email_input",
-      "name": "Email Input",
-      "settings": [
-        { "type": "text", "id": "label", "label": "Label", "default": "Email Address" },
-        { "type": "text", "id": "placeholder", "label": "Placeholder" },
-        { "type": "checkbox", "id": "required", "label": "Required", "default": true }
-      ]
-    },
-    {
-      "type": "tel_input",
-      "name": "Phone Input",
-      "settings": [
-        { "type": "text", "id": "label", "label": "Label", "default": "Phone Number" },
-        { "type": "text", "id": "placeholder", "label": "Placeholder", "default": "(555) 123-4567" },
-        { "type": "checkbox", "id": "required", "label": "Required", "default": true }
-      ]
-    },
-    {
-      "type": "textarea_input",
-      "name": "Textarea Input",
-      "settings": [
-        { "type": "text", "id": "label", "label": "Label", "default": "Notes" },
-        { "type": "text", "id": "placeholder", "label": "Placeholder", "default": "Optional" }
-      ]
-    },
-    {
-      "type": "html_block",
-      "name": "Custom HTML",
-      "settings": [
-        { "type": "html", "id": "html", "label": "HTML Code" }
-      ]
     }
   ],
   "presets": [
