@@ -32,7 +32,7 @@
                   <li><span class="corporate__check">✓</span> {{ perk | strip }}</li>
                 {% endfor %}
               </ul>
-              <a href="mailto:{{ section.settings.contact_email }}" class="btn btn-full {% if block.settings.style == 'gold' %}btn-pink{% else %}btn-outline{% endif %}">{{ block.settings.cta }}</a>
+              <a href="mailto:{{ section.settings.contact_email }}" class="btn btn-full {% if block.settings.style == 'gold' %}btn-pink{% else %}btn-outline-dark{% endif %}">{{ block.settings.cta }}</a>
             </div>
           {% endif %}
         {%- endfor -%}
@@ -48,7 +48,7 @@
             <li><span class="corporate__check">✓</span> Social media acknowledgement</li>
             <li><span class="corporate__check">✓</span> Digital Partner Badge</li>
           </ul>
-          <a href="mailto:info@chemocabs.org" class="btn btn-full btn-outline">Become a Silver Partner</a>
+          <a href="mailto:info@chemocabs.org" class="btn btn-full btn-outline-dark">Become a Silver Partner</a>
         </div>
         <div class="corporate__card card fade-up corporate__card--gold">
           <span class="corporate__badge">★ MOST IMPACT</span>
