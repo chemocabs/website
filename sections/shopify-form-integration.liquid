@@ -14,41 +14,33 @@
     {%- endif -%}
 
     <div class="shopify-form-integration__content fade-up">
-      {%- if section.settings.form != blank -%}
+      {%- if section.settings.form_id != blank -%}
         {%- comment -%} 
-          Rendering the official Shopify Form. 
-          The 'form' setting type provides the form object/handle.
+          Rendering the official Shopify Form. Using a safer check for the snippet.
         {%- endcomment -%}
-        {% render 'form', form: section.settings.form %}
+        <div class="shopify-form-wrapper">
+          {% render 'form', form: section.settings.form_id %}
+        </div>
       {%- else -%}
         <div class="shopify-form-integration__placeholder card">
-          <p>Please select a Shopify Form in the section settings to display it here.</p>
+          <p>Please enter a Shopify Form ID in the section settings to display it here.</p>
         </div>
       {%- endif -%}
-
-      {%- comment -%} Support for app blocks if added later {%- endcomment -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == '@app' -%}
-          <div class="shopify-form-integration__app-block" {{ block.shopify_attributes }}>
-            {% render block %}
-          </div>
-        {%- endif -%}
-      {%- endfor -%}
     </div>
   </div>
 </section>
 
 <style>
   .section-{{ section.id }} {
-    background-color: {{ section.settings.bg_color }};
-    color: {{ section.settings.text_color }};
-    padding-top: {{ section.settings.padding_top }}px;
-    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.bg_color | default: '#ffffff' }};
+    color: {{ section.settings.text_color | default: '#0a0a0a' }};
+    padding-top: {{ section.settings.padding_top | default: 80 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | default: 80 }}px;
   }
   
   .section-{{ section.id }} .section-heading,
   .section-{{ section.id }} .section-subheading {
-    color: {{ section.settings.text_color }};
+    color: {{ section.settings.text_color | default: '#0a0a0a' }};
   }
 
   .shopify-form-integration__header {
@@ -66,17 +58,13 @@
     padding: 60px;
     border: 2px dashed #e5e7eb;
     background: rgba(0,0,0,0.02);
-  }
-
-  /* Ensure Shopify Form matches theme aesthetics */
-  .section-{{ section.id }} .shopify-form {
-    background: transparent !important;
+    border-radius: var(--radius-lg);
   }
 
   @media (max-width: 768px) {
     .section-{{ section.id }} {
-      padding-top: {{ section.settings.padding_top | times: 0.75 | round }}px;
-      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round }}px;
+      padding-top: {{ section.settings.padding_top | times: 0.75 | default: 60 | round }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | default: 60 | round }}px;
     }
   }
 </style>
@@ -90,10 +78,10 @@
       "content": "Form Selection"
     },
     {
-      "type": "form",
-      "id": "form",
-      "label": "Select Shopify Form",
-      "info": "Requires the Shopify Forms app to be installed and an active form created."
+      "type": "text",
+      "id": "form_id",
+      "label": "Shopify Form ID",
+      "info": "Enter the ID of your Shopify Form (e.g., gid://shopify/App/...) or its handle."
     },
     {
       "type": "header",
@@ -146,11 +134,6 @@
       "unit": "px",
       "label": "Bottom Padding",
       "default": 80
-    }
-  ],
-  "blocks": [
-    {
-      "type": "@app"
     }
   ],
   "presets": [
