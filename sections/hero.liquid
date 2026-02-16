@@ -38,7 +38,7 @@
     </div>
 
     <div class="hero__visual">
-      <div class="hero__image-frame 3d-tilt" data-image-frame>
+      <div class="hero__image-frame">
         <div class="hero__image-glow"></div>
         <img
           src="{{ 'hero-car.png' | asset_url }}"
@@ -127,27 +127,7 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // 3D Tilt Effect
-    const frame = document.querySelector('[data-image-frame]');
-    if (frame) {
-      frame.addEventListener('mousemove', (e) => {
-        const { left, top, width, height } = frame.getBoundingClientRect();
-        const x = (e.clientX - left) / width - 0.5;
-        const y = (e.clientY - top) / height - 0.5;
-        const tiltX = y * 20;
-        const tiltY = x * -20;
-        frame.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.02)`;
-        const glow = frame.querySelector('.hero__image-glow');
-        if (glow) {
-          glow.style.background = `radial-gradient(circle at ${e.clientX - left}px ${e.clientY - top}px, rgba(255,255,255,0.2), transparent 40%)`;
-        }
-      });
-      frame.addEventListener('mouseleave', () => {
-        frame.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-        const glow = frame.querySelector('.hero__image-glow');
-        if (glow) glow.style.background = 'transparent';
-      });
-    }
+    // 3D Tilt Effect removed
 
     // Counters
     const countersSection = document.querySelector('[data-counters]');

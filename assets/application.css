@@ -2448,6 +2448,48 @@ ol {
     }
 }
 
+/* Ride Request Coverage Block */
+.ride-request__coverage {
+    margin-top: 32px;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ride-request__coverage-title {
+    color: var(--pink-light);
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ride-request__coverage-text {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.ride-request__urgent {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 16px;
+    font-size: 0.9rem;
+    color: var(--white);
+}
+
+.ride-request__urgent a {
+    color: var(--pink-primary);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.ride-request__urgent a:hover {
+    color: var(--pink-light);
+}
+
 /* ===== WHAT WE DO ===== */
 .what-we-do {
     padding: var(--section-padding);
