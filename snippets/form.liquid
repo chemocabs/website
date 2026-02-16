@@ -1,0 +1,17 @@
+{%- comment -%}
+  Shopify Form Snippet Bridge
+  This snippet serves as a fallback or custom rendering point for Shopify Forms.
+  It expects a 'form' variable (the form ID or handle).
+{%- endcomment -%}
+
+{%- if form != blank -%}
+  <div class="shopify-app-form-wrapper" data-form-id="{{ form }}">
+    {%- comment -%} 
+      Note: Most modern Shopify Forms are rendered via App Blocks.
+      If this snippet is used, ensure the Shopify Forms app script is loaded.
+    {%- endcomment -%}
+    <div id="shopify-form-{{ form | handleize }}"></div>
+  </div>
+{%- else -%}
+  <p class="form-error">No form ID provided to the form snippet.</p>
+{%- endif -%}
