@@ -1,5 +1,6 @@
+
 <section class="hero" aria-labelledby="hero-heading">
-  {/* Animated orbs */}
+  {%- comment -%} Animated orbs {%- endcomment -%}
   <div class="hero__orbs" aria-hidden="true">
     <div class="hero__orb hero__orb--1"></div>
     <div class="hero__orb hero__orb--2"></div>
@@ -9,20 +10,20 @@
   <div class="hero__container container">
     <div class="hero__content">
       <h1 id="hero-heading" class="hero__title">
-        <span class="gradient-text">{{ section.settings.heading_gradient }}</span>
+        <span class="gradient-text">Driving Hope</span>
         <br />
-        <span>{{ section.settings.heading_solid }}</span>
+        <span>Across Canada</span>
       </h1>
-      <p class="hero__tagline">{{ section.settings.tagline }}</p>
+      <p class="hero__tagline"><em>No patient rides alone.</em></p>
       <p class="hero__body">
-        {{ section.settings.body_text }}
+        We provide free rides to cancer treatment for patients across Canada — through volunteer drivers, Uber, Lyft, and Hopp. Because getting to your appointment should never be a barrier to beating cancer.
       </p>
       <div class="hero__ctas">
         <a href="#donate" class="btn btn-pink btn-lg">
-          🩷 {{ section.settings.cta_primary_text }}
+          🩷 Donate — Fund a Ride
         </a>
         <a href="#ride-request" class="btn btn-outline btn-lg">
-          🚗 {{ section.settings.cta_secondary_text }}
+          🚗 Request a Free Ride
         </a>
       </div>
       <div class="hero__trust">
@@ -52,7 +53,7 @@
     </div>
   </div>
 
-  {/* Impact counters */}
+  {%- comment -%} Impact counters {%- endcomment -%}
   <div class="hero__counters" data-counters>
     <div class="container">
       <div class="hero__counters-grid">
@@ -72,6 +73,7 @@
     </div>
   </div>
 </section>
+
 
 {% schema %}
 {
