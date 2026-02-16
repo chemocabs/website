@@ -45,48 +45,107 @@
         <p class="ride-request__form-sub">We'll confirm within 24 hours.</p>
 
 
-        <div class="ride-request__form-body">
-          {%- for block in section.blocks -%}
-            {%- case block.type -%}
-              {%- when 'text_input' -%}
-                <div class="form-group" {{ block.shopify_attributes }}>
-                  <label class="form-label">{{ block.settings.label }}{% if block.settings.required %} *{% endif %}</label>
-                  <input name="{{ block.settings.label | handleize }}" type="text" class="form-input form-input-dark" {% if block.settings.required %}required{% endif %} placeholder="{{ block.settings.placeholder }}">
-                </div>
-              {%- when 'email_input' -%}
-                <div class="form-group" {{ block.shopify_attributes }}>
-                  <label class="form-label">{{ block.settings.label }}{% if block.settings.required %} *{% endif %}</label>
-                  <input name="email" type="email" class="form-input form-input-dark" {% if block.settings.required %}required{% endif %} placeholder="{{ block.settings.placeholder }}">
-                </div>
-              {%- when 'tel_input' -%}
-                <div class="form-group" {{ block.shopify_attributes }}>
-                  <label class="form-label">{{ block.settings.label }}{% if block.settings.required %} *{% endif %}</label>
-                  <input name="phone" type="tel" class="form-input form-input-dark" {% if block.settings.required %}required{% endif %} placeholder="{{ block.settings.placeholder }}">
-                </div>
-              {%- when 'select_input' -%}
-                <div class="form-group" {{ block.shopify_attributes }}>
-                  <label class="form-label">{{ block.settings.label }}</label>
-                  <select name="{{ block.settings.label | handleize }}" class="form-input form-input-dark">
-                    {% assign options = block.settings.options | split: ',' %}
-                    {% for option in options %}
-                      <option value="{{ option | strip | handleize }}">{{ option | strip }}</option>
-                    {% endfor %}
-                  </select>
-                </div>
-              {%- when 'textarea_input' -%}
-                <div class="form-group" {{ block.shopify_attributes }}>
-                  <label class="form-label">{{ block.settings.label }}</label>
-                  <textarea name="{{ block.settings.label | handleize }}" class="form-input form-input-dark" rows="3" placeholder="{{ block.settings.placeholder }}"></textarea>
-                </div>
-              {%- when 'html_block' -%}
-                <div class="form-group" {{ block.shopify_attributes }}>
-                  {{ block.settings.html }}
-                </div>
-              {%- when '@app' -%}
-                {% render block %}
-            {%- endcase -%}
-          {%- endfor -%}
-        </div>
+        <form id="ride-form" noValidate>
+          <div class="ride-request__form-body">
+            {%- liquid
+              assign has_form_blocks = false
+              for block in section.blocks
+                if block.type != 'feature' and block.type != '@app'
+                  assign has_form_blocks = true
+                  break
+                endif
+              endfor
+            -%}
+
+            {%- if has_form_blocks or section.blocks.size > 0 -%}
+              {%- for block in section.blocks -%}
+                {%- case block.type -%}
+                  {%- when 'text_input' -%}
+                    <div class="form-group" {{ block.shopify_attributes }}>
+                      <label class="form-label">{{ block.settings.label }}{% if block.settings.required %} *{% endif %}</label>
+                      <input name="{{ block.settings.label | handleize }}" type="text" class="form-input form-input-dark" {% if block.settings.required %}required{% endif %} placeholder="{{ block.settings.placeholder }}">
+                    </div>
+                  {%- when 'email_input' -%}
+                    <div class="form-group" {{ block.shopify_attributes }}>
+                      <label class="form-label">{{ block.settings.label }}{% if block.settings.required %} *{% endif %}</label>
+                      <input name="email" type="email" class="form-input form-input-dark" {% if block.settings.required %}required{% endif %} placeholder="{{ block.settings.placeholder }}">
+                    </div>
+                  {%- when 'tel_input' -%}
+                    <div class="form-group" {{ block.shopify_attributes }}>
+                      <label class="form-label">{{ block.settings.label }}{% if block.settings.required %} *{% endif %}</label>
+                      <input name="phone" type="tel" class="form-input form-input-dark" {% if block.settings.required %}required{% endif %} placeholder="{{ block.settings.placeholder }}">
+                    </div>
+                  {%- when 'select_input' -%}
+                    <div class="form-group" {{ block.shopify_attributes }}>
+                      <label class="form-label">{{ block.settings.label }}</label>
+                      <select name="{{ block.settings.label | handleize }}" class="form-input form-input-dark">
+                        {% assign options = block.settings.options | split: ',' %}
+                        {% for option in options %}
+                          <option value="{{ option | strip | handleize }}">{{ option | strip }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  {%- when 'textarea_input' -%}
+                    <div class="form-group" {{ block.shopify_attributes }}>
+                      <label class="form-label">{{ block.settings.label }}</label>
+                      <textarea name="{{ block.settings.label | handleize }}" class="form-input form-input-dark" rows="3" placeholder="{{ block.settings.placeholder }}"></textarea>
+                    </div>
+                  {%- when 'html_block' -%}
+                    <div class="form-group" {{ block.shopify_attributes }}>
+                      {{ block.settings.html }}
+                    </div>
+                  {%- when '@app' -%}
+                    {% render block %}
+                {%- endcase -%}
+              {%- endfor -%}
+            {%- endif -%}
+
+            {%- unless has_form_blocks -%}
+              {%- comment -%} Default Form Fallback {%- endcomment -%}
+              <div class="form-group">
+                <label class="form-label">Full Name *</label>
+                <input name="name" class="form-input form-input-dark" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email *</label>
+                <input name="email" type="email" class="form-input form-input-dark" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Phone *</label>
+                <input name="phone" type="tel" class="form-input form-input-dark" placeholder="(555) 123-4567" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">City / Province *</label>
+                <input name="city" class="form-input form-input-dark" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Treatment Facility *</label>
+                <input name="facility" class="form-input form-input-dark" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Next Appointment Date *</label>
+                <input name="date" type="date" class="form-input form-input-dark" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Ride Preference</label>
+                <select name="preference" class="form-input form-input-dark">
+                  <option value="no-preference">No Preference</option>
+                  <option value="volunteer">Volunteer Driver</option>
+                  <option value="rideshare">Rideshare (Uber/Lyft/Hopp)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Notes</label>
+                <textarea name="notes" class="form-input form-input-dark" rows="3" placeholder="Optional"></textarea>
+              </div>
+            {%- endunless -%}
+          </div>
+
+          <button type="submit" id="ride-submit" class="btn btn-pink btn-lg btn-full" style="margin-top: 24px;">
+            Submit Ride Request →
+          </button>
+          <p class="ride-request__secure">🔒 Your information is confidential and secure.</p>
+        </form>
       </div>
     </div>
   </div>
@@ -173,5 +232,31 @@
   ]
 }
 {% endschema %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('ride-form');
+    const grid = document.getElementById('ride-grid');
+    const success = document.getElementById('ride-success');
+    const submitBtn = document.getElementById('ride-submit');
+
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        submitBtn.textContent = 'Submitting...';
+        submitBtn.disabled = true;
+        
+        setTimeout(() => {
+          grid.style.display = 'none';
+          success.style.display = 'block';
+          if (success.scrollIntoView) {
+            success.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 1500);
+      });
+    }
+  });
+</script>
+
 
 
