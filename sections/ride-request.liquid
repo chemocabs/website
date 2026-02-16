@@ -39,10 +39,63 @@
       </div>
 
       <div class="ride-request__form-card">
+        {%- liquid
+          assign has_app_block = false
+          for block in section.blocks
+            if block.type == '@app'
+              assign has_app_block = true
+              break
+            endif
+          endfor
+        -%}
+
         <div class="ride-request__form-content">
           {%- for block in section.blocks -%}
-            {% render block %}
+            {%- case block.type -%}
+              {%- when '@app' -%}
+                {% render block %}
+            {%- endcase -%}
           {%- endfor -%}
+
+          {%- if has_app_block == false -%}
+            <form id="ride-form" noValidate>
+              <div class="ride-request__form-body">
+                <div class="form-group">
+                  <label class="form-label">Full Name *</label>
+                  <input name="name" class="form-input form-input-dark" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email *</label>
+                  <input name="email" type="email" class="form-input form-input-dark" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Phone *</label>
+                  <input name="phone" type="tel" class="form-input form-input-dark" placeholder="(555) 123-4567" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">City / Province *</label>
+                  <input name="city" class="form-input form-input-dark" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Treatment Facility *</label>
+                  <input name="facility" class="form-input form-input-dark" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Next Appointment Date *</label>
+                  <input name="date" type="date" class="form-input form-input-dark" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Notes</label>
+                  <textarea name="notes" class="form-input form-input-dark" rows="3" placeholder="Optional"></textarea>
+                </div>
+              </div>
+
+              <button type="submit" id="ride-submit" class="btn btn-pink btn-lg btn-full" style="margin-top: 24px;">
+                Submit Ride Request →
+              </button>
+              <p class="ride-request__secure">🔒 Your information is confidential and secure.</p>
+            </form>
+          {%- endif -%}
         </div>
       </div>
     </div>
