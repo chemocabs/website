@@ -57,9 +57,7 @@
           {%- for block in section.blocks -%}
             {%- case block.type -%}
               {%- when '@app' -%}
-                <div class="ride-request__app-block" {{ block.shopify_attributes }}>
-                  {% render block %}
-                </div>
+                {% render block %}
               
               {%- when 'heading' -%}
                 <h3 class="ride-request__form-title" {{ block.shopify_attributes }}>{{ block.settings.text }}</h3>
@@ -159,6 +157,9 @@
   ],
   "blocks": [
     {
+      "type": "@app"
+    },
+    {
       "type": "feature",
       "name": "Feature List Item",
       "settings": [
@@ -220,21 +221,12 @@
       "settings": [
         { "type": "html", "id": "html", "label": "HTML Code" }
       ]
-    },
-    {
-      "type": "@app"
     }
   ],
   "presets": [
     {
       "name": "Ride Request",
-      "blocks": [
-        { "type": "feature", "settings": { "text": "🚗 Volunteer drivers or rideshare - your choice" } },
-        { "type": "feature", "settings": { "text": "💰 Always 100% free for patients" } },
-        { "type": "feature", "settings": { "text": "🏥 Rides to any cancer treatment facility in Canada" } },
-        { "type": "heading", "settings": { "text": "Request Your Free Ride" } },
-        { "type": "rich_text", "settings": { "text": "<p>We'll confirm within 24 hours. Your information is secure.</p>" } }
-      ]
+      "blocks": []
     }
   ]
 }
