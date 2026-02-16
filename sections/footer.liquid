@@ -12,27 +12,31 @@
         <p class="footer__desc">
           No patient rides alone. We provide free transportation to cancer treatment for patients across Canada through a dedicated network of volunteers and rideshare partners.
         </p>
-        <div class="footer__social">
-          <a href="#" aria-label="Facebook">FB</a>
-          <a href="#" aria-label="Instagram">IG</a>
-          <a href="#" aria-label="LinkedIn">LN</a>
-          <a href="#" aria-label="Twitter">TW</a>
+        <div class="footer__socials">
+          <a href="#" class="footer__social-link" aria-label="Facebook">F</a>
+          <a href="#" class="footer__social-link" aria-label="Instagram">I</a>
+          <a href="#" class="footer__social-link" aria-label="LinkedIn">L</a>
+          <a href="#" class="footer__social-link" aria-label="Twitter">X</a>
         </div>
       </div>
 
       <!-- Column 2,3,4: Links -->
-      {%- for block in section.blocks -%}
-        {% if block.type == 'link_list' %}
-          <div class="footer__col">
-            <h4 class="footer__title">{{ block.settings.title }}</h4>
-            <ul class="footer__links">
-              {% for link in block.settings.menu.links %}
-                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-              {% endfor %}
-            </ul>
-          </div>
-        {% endif %}
-      {%- endfor -%}
+      <div class="footer__col">
+        <h4 class="footer__col-title">Quick Links</h4>
+        <ul>
+          <li><a href="#ride-request">Request a Ride</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#stories">Patient Stories</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4 class="footer__col-title">Support Us</h4>
+        <ul>
+          <li><a href="#donate">Donate Now</a></li>
+          <li><a href="#volunteer">Volunteer</a></li>
+          <li><a href="#comfort-bags">Comfort Bags</a></li>
+        </ul>
+      </div>
     </div>
 
     <!-- Bottom Row -->
