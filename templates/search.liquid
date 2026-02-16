@@ -1,0 +1,8 @@
+<h1>Search Results</h1>
+<div class="container">
+  {% if search.performed %}
+    {% for item in search.results %}
+      <div>{{ item.title }}</div>
+    {% endfor %}
+  {% endif %}
+</div>
