@@ -44,43 +44,106 @@
         <h3 class="ride-request__form-title">Request Your Free Ride</h3>
         <p class="ride-request__form-sub">We'll confirm within 24 hours.</p>
 
+
         <form id="ride-form" noValidate>
-          <div class="form-group">
-            <label class="form-label">Full Name *</label>
-            <input name="name" class="form-input form-input-dark" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label" style="color: rgba(255,255,255,0.9)">Email *</label>
-            <input name="email" type="email" class="form-input form-input-dark" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label" style="color: rgba(255,255,255,0.9)">Phone *</label>
-            <input name="phone" type="tel" class="form-input form-input-dark" placeholder="(555) 123-4567" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label" style="color: rgba(255,255,255,0.9)">City / Province *</label>
-            <input name="city" class="form-input form-input-dark" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label" style="color: rgba(255,255,255,0.9)">Treatment Facility *</label>
-            <input name="facility" class="form-input form-input-dark" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label" style="color: rgba(255,255,255,0.9)">Next Appointment Date *</label>
-            <input name="date" type="date" class="form-input form-input-dark" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label" style="color: rgba(255,255,255,0.9)">Ride Preference</label>
-            <select name="preference" class="form-input form-input-dark">
-              <option value="no-preference">No Preference</option>
-              <option value="volunteer">Volunteer Driver</option>
-              <option value="rideshare">Rideshare (Uber/Lyft/Hopp)</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label" style="color: rgba(255,255,255,0.9)">Notes</label>
-            <textarea name="notes" class="form-input form-input-dark" rows="3" placeholder="Optional"></textarea>
-          </div>
+          {%- liquid
+            assign form_blocks = section.blocks | where: "type", "text_input" | first
+            if form_blocks == nil
+              assign form_blocks = section.blocks | where: "type", "email_input" | first
+            endif
+            if form_blocks == nil
+              assign form_blocks = section.blocks | where: "type", "tel_input" | first
+            endif
+            if form_blocks == nil
+              assign form_blocks = section.blocks | where: "type", "select_input" | first
+            endif
+            if form_blocks == nil
+              assign form_blocks = section.blocks | where: "type", "textarea_input" | first
+            endif
+            if form_blocks == nil
+              assign form_blocks = section.blocks | where: "type", "html_block" | first
+            endif
+          -%}
+
+          {%- if form_blocks -%}
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when 'text_input' -%}
+                  <div class="form-group" {{ block.shopify_attributes }}>
+                    <label class="form-label">{{ block.settings.label }}{% if block.settings.required %} *{% endif %}</label>
+                    <input name="{{ block.settings.label | handleize }}" type="text" class="form-input form-input-dark" {% if block.settings.required %}required{% endif %} placeholder="{{ block.settings.placeholder }}">
+                  </div>
+                {%- when 'email_input' -%}
+                  <div class="form-group" {{ block.shopify_attributes }}>
+                    <label class="form-label">{{ block.settings.label }}{% if block.settings.required %} *{% endif %}</label>
+                    <input name="email" type="email" class="form-input form-input-dark" {% if block.settings.required %}required{% endif %} placeholder="{{ block.settings.placeholder }}">
+                  </div>
+                {%- when 'tel_input' -%}
+                  <div class="form-group" {{ block.shopify_attributes }}>
+                    <label class="form-label">{{ block.settings.label }}{% if block.settings.required %} *{% endif %}</label>
+                    <input name="phone" type="tel" class="form-input form-input-dark" {% if block.settings.required %}required{% endif %} placeholder="{{ block.settings.placeholder }}">
+                  </div>
+                {%- when 'select_input' -%}
+                  <div class="form-group" {{ block.shopify_attributes }}>
+                    <label class="form-label">{{ block.settings.label }}</label>
+                    <select name="{{ block.settings.label | handleize }}" class="form-input form-input-dark">
+                      {% assign options = block.settings.options | split: ',' %}
+                      {% for option in options %}
+                        <option value="{{ option | strip | handleize }}">{{ option | strip }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                {%- when 'textarea_input' -%}
+                  <div class="form-group" {{ block.shopify_attributes }}>
+                    <label class="form-label">{{ block.settings.label }}</label>
+                    <textarea name="{{ block.settings.label | handleize }}" class="form-input form-input-dark" rows="3" placeholder="{{ block.settings.placeholder }}"></textarea>
+                  </div>
+                {%- when 'html_block' -%}
+                  <div class="form-group" {{ block.shopify_attributes }}>
+                    {{ block.settings.html }}
+                  </div>
+              {%- endcase -%}
+            {%- endfor -%}
+          {%- else -%}
+            {%- comment -%} Default Form Fallback {%- endcomment -%}
+            <div class="form-group">
+              <label class="form-label">Full Name *</label>
+              <input name="name" class="form-input form-input-dark" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email *</label>
+              <input name="email" type="email" class="form-input form-input-dark" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone *</label>
+              <input name="phone" type="tel" class="form-input form-input-dark" placeholder="(555) 123-4567" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">City / Province *</label>
+              <input name="city" class="form-input form-input-dark" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Treatment Facility *</label>
+              <input name="facility" class="form-input form-input-dark" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Next Appointment Date *</label>
+              <input name="date" type="date" class="form-input form-input-dark" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Ride Preference</label>
+              <select name="preference" class="form-input form-input-dark">
+                <option value="no-preference">No Preference</option>
+                <option value="volunteer">Volunteer Driver</option>
+                <option value="rideshare">Rideshare (Uber/Lyft/Hopp)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Notes</label>
+              <textarea name="notes" class="form-input form-input-dark" rows="3" placeholder="Optional"></textarea>
+            </div>
+          {%- endif -%}
+
           <button type="submit" id="ride-submit" class="btn btn-pink btn-lg btn-full">
             Submit Ride Request →
           </button>
@@ -105,6 +168,56 @@
       "settings": [
         { "type": "text", "id": "text", "label": "Feature Text", "default": "🚗 Volunteer drivers or rideshare" }
       ]
+    },
+    {
+      "type": "text_input",
+      "name": "Text Input",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Full Name" },
+        { "type": "text", "id": "placeholder", "label": "Placeholder" },
+        { "type": "checkbox", "id": "required", "label": "Required", "default": true }
+      ]
+    },
+    {
+      "type": "email_input",
+      "name": "Email Input",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Email Address" },
+        { "type": "text", "id": "placeholder", "label": "Placeholder" },
+        { "type": "checkbox", "id": "required", "label": "Required", "default": true }
+      ]
+    },
+    {
+      "type": "tel_input",
+      "name": "Phone Input",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Phone Number" },
+        { "type": "text", "id": "placeholder", "label": "Placeholder", "default": "(555) 123-4567" },
+        { "type": "checkbox", "id": "required", "label": "Required", "default": true }
+      ]
+    },
+    {
+      "type": "select_input",
+      "name": "Select Input",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Ride Preference" },
+        { "type": "textarea", "id": "options", "label": "Options (Comma separated)", "default": "No Preference, Volunteer Driver, Rideshare" }
+      ]
+    },
+    {
+      "type": "textarea_input",
+      "name": "Textarea Input",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Notes" },
+        { "type": "text", "id": "placeholder", "label": "Placeholder", "default": "Optional" }
+      ]
+    },
+    {
+      "type": "html_block",
+      "name": "Custom HTML",
+      "settings": [
+        { "type": "html", "id": "html", "label": "HTML Code" }
+      ]
     }
   ],
   "presets": [
@@ -127,16 +240,21 @@
     const success = document.getElementById('ride-success');
     const submitBtn = document.getElementById('ride-submit');
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      submitBtn.textContent = 'Submitting...';
-      submitBtn.disabled = true;
-      
-      setTimeout(() => {
-        grid.style.display = 'none';
-        success.style.display = 'block';
-        success.scrollIntoView({ behavior: 'smooth' });
-      }, 1500);
-    });
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        submitBtn.textContent = 'Submitting...';
+        submitBtn.disabled = true;
+        
+        setTimeout(() => {
+          grid.style.display = 'none';
+          success.style.display = 'block';
+          if (success.scrollIntoView) {
+            success.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 1500);
+      });
+    }
   });
 </script>
+
