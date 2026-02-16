@@ -14,12 +14,6 @@
     {%- endif -%}
 
     <div class="shopify-form-integration__content fade-up">
-      {%- if section.settings.form_id != blank -%}
-        <div class="shopify-form-wrapper">
-          {% render 'form', form: section.settings.form_id %}
-        </div>
-      {%- endif -%}
-
       {%- comment -%} App blocks are the preferred way for Shopify Forms OS 2.0 {%- endcomment -%}
       {%- for block in section.blocks -%}
         {%- if block.type == '@app' -%}
@@ -29,9 +23,9 @@
         {%- endif -%}
       {%- endfor -%}
 
-      {%- if section.settings.form_id == blank and section.blocks.size == 0 -%}
+      {%- if section.blocks.size == 0 -%}
         <div class="shopify-form-integration__placeholder card">
-          <p>Please enter a Shopify Form ID or add an App Block in the section settings.</p>
+          <p>Please add a Shopify Forms App Block in the section settings to display it here.</p>
         </div>
       {%- endif -%}
     </div>
@@ -81,17 +75,6 @@
 {
   "name": "Shopify Form Integration",
   "settings": [
-    {
-      "type": "header",
-      "content": "Form Selection"
-    },
-    {
-      "type": "text",
-      "id": "form_id",
-      "label": "Shopify Form ID",
-      "default": "874037",
-      "info": "Enter your Shopify Form ID here."
-    },
     {
       "type": "header",
       "content": "Content"
