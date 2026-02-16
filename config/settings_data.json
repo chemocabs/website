@@ -1,9 +1,152 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-    "current": "Default",
-    "presets": {
-        "Default": {
-            "sections": {},
-            "settings": {}
+  "current": {
+    "settings": {},
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "menu": ""
         }
+      },
+      "sticky-bar": {
+        "type": "sticky-bar",
+        "settings": {}
+      },
+      "hero": {
+        "type": "hero",
+        "settings": {
+          "heading_gradient": "Driving Hope",
+          "heading_solid": "Across Canada",
+          "tagline": "No patient rides alone.",
+          "body_text": "We provide free rides to cancer treatment for patients across Canada - through volunteer drivers, Uber, Lyft, and Hopp. Because getting to your appointment should never be a barrier to beating cancer.",
+          "cta_primary_text": "Donate - Fund a Ride",
+          "cta_secondary_text": "Request a Free Ride"
+        }
+      },
+      "trust-bar": {
+        "type": "trust-bar",
+        "settings": {}
+      },
+      "what-we-do": {
+        "type": "what-we-do",
+        "settings": {
+          "heading": "Three Ways We Drive Hope"
+        }
+      },
+      "the-problem": {
+        "type": "the-problem",
+        "settings": {
+          "heading": "Cancer Doesn't Wait. Neither Should a Ride.",
+          "body_text": ""
+        }
+      },
+      "donation-widget": {
+        "type": "donation-widget",
+        "settings": {
+          "heading": "Your Donation Gets Patients to Treatment",
+          "subheading": "Choose how you want to help - every dollar has a direct, tangible impact."
+        }
+      },
+      "giving-tiers": {
+        "type": "giving-tiers",
+        "settings": {
+          "heading": "Supporters",
+          "subheading": "Join our community."
+        }
+      },
+      "comfort-bags": {
+        "type": "comfort-bags",
+        "settings": {
+          "heading": "Comfort Bags",
+          "subheading": "Oncology-recommended comforts.",
+          "value_badge": "$170 Value",
+          "description": "",
+          "tiers_title": "Gift a Comfort Bag"
+        }
+      },
+      "how-it-works": {
+        "type": "how-it-works",
+        "settings": {
+          "heading": "From Request to Ride in Four Simple Steps"
+        }
+      },
+      "corporate-partners": {
+        "type": "corporate-partners",
+        "settings": {
+          "heading": "Align Your Brand With a Movement",
+          "subheading": "Chemo Cabs corporate partners join a visible, high-impact movement.",
+          "selling_point": "Our partners receive year-round brand visibility.",
+          "contact_email": "info@chemocabs.org",
+          "show_logos": true,
+          "logos_title": "Current Partners",
+          "logos_sub": "Join the growing list of organizations."
+        }
+      },
+      "ride-request": {
+        "type": "ride-request",
+        "settings": {
+          "heading": "You Focus on Getting Better. We'll Handle the Ride.",
+          "subheading": "Whether it's chemo, radiation, or surgery - submit a request and we'll take care of the rest.",
+          "feature_1": "🚗 Volunteer drivers or rideshare - your choice",
+          "feature_2": "💰 Always 100% free for patients",
+          "feature_3": "🏥 Rides to any cancer treatment facility in Canada"
+        }
+      },
+      "shopify-form-integration": {
+        "type": "shopify-form-integration",
+        "settings": {
+          "form_id": "874037",
+          "heading": "Get in Touch",
+          "subheading": "<p>Fill out the form below and we'll get back to you shortly.</p>",
+          "bg_color": "#ffffff",
+          "text_color": "#0a0a0a",
+          "padding_top": 80,
+          "padding_bottom": 80
+        }
+      },
+      "testimonials": {
+        "type": "testimonials",
+        "settings": {
+          "heading": "Voices of Hope",
+          "subheading": "Real stories from patients who got the rides they needed."
+        }
+      },
+      "volunteer": {
+        "type": "volunteer",
+        "settings": {
+          "heading": "Drive Hope in Your Community",
+          "subheading": "Whether you can drive, fundraise, or pack Comfort Bags - there's a place for you.",
+          "cta_text": "Sign Up to Volunteer",
+          "email": "info@chemocabs.org",
+          "footer_text": "Join 200+ volunteers across Canada"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {}
+      }
+    },
+    "content_for_index": [],
+    "blocks": {
+      "13768625480086291342": {
+        "type": "shopify://apps/forms/blocks/forms/8744a304-fcb1-4347-b211-bb6b4759a76a",
+        "disabled": false,
+        "settings": {}
+      }
     }
+  },
+  "presets": {
+    "Default": {
+      "settings": {}
+    }
+  }
 }
