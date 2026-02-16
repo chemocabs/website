@@ -127,18 +127,10 @@
                 <input name="date" type="date" class="form-input form-input-dark" required>
               </div>
               <div class="form-group">
-                <label class="form-label">Ride Preference</label>
-                <select name="preference" class="form-input form-input-dark">
-                  <option value="no-preference">No Preference</option>
-                  <option value="volunteer">Volunteer Driver</option>
-                  <option value="rideshare">Rideshare (Uber/Lyft/Hopp)</option>
-                </select>
-              </div>
-              <div class="form-group">
                 <label class="form-label">Notes</label>
                 <textarea name="notes" class="form-input form-input-dark" rows="3" placeholder="Optional"></textarea>
               </div>
-            {%- endunless -%}
+{%- endunless -%}
           </div>
 
           <button type="submit" id="ride-submit" class="btn btn-pink btn-lg btn-full" style="margin-top: 24px;">
@@ -191,14 +183,6 @@
         { "type": "text", "id": "label", "label": "Label", "default": "Phone Number" },
         { "type": "text", "id": "placeholder", "label": "Placeholder", "default": "(555) 123-4567" },
         { "type": "checkbox", "id": "required", "label": "Required", "default": true }
-      ]
-    },
-    {
-      "type": "select_input",
-      "name": "Select Input",
-      "settings": [
-        { "type": "text", "id": "label", "label": "Label", "default": "Ride Preference" },
-        { "type": "textarea", "id": "options", "label": "Options (Comma separated)", "default": "No Preference, Volunteer Driver, Rideshare" }
       ]
     },
     {
