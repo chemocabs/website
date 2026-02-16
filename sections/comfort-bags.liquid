@@ -3,11 +3,8 @@
     <div class="text-center fade-up">
       <p class="section-label">COMFORT & CARE</p>
       <h2 class="section-heading" id="comfort-heading">{{ section.settings.heading }}</h2>
-      <p class="section-subheading">
-        {{ section.settings.subheading }}
-      </p>
+      <p class="section-subheading">{{ section.settings.subheading }}</p>
     </div>
-
     <div class="comfort-bags__showcase fade-up">
       <div class="comfort-bags__image-side">
         <div class="comfort-bags__image-frame">
@@ -21,14 +18,11 @@
           </div>
           <div class="comfort-bags__image-badges">
             <span class="badge badge-pink">{{ section.settings.value_badge }}</span>
-            <span class="badge" style="background: #f3f4f6; color: #374151;">Available in Pink or Black</span>
           </div>
         </div>
       </div>
       <div class="comfort-bags__details-side">
-        <div class="comfort-bags__description">
-          {{ section.settings.description }}
-        </div>
+        <div class="comfort-bags__description">{{ section.settings.description }}</div>
         <div class="comfort-bags__items-grid">
           {%- for block in section.blocks -%}
             {% if block.type == 'item' %}
@@ -41,23 +35,17 @@
         </div>
       </div>
     </div>
-
-    <!-- Bag donation tiers -->
     <div class="comfort-bags__tiers fade-up">
       <h3 class="comfort-bags__tiers-title">{{ section.settings.tiers_title }}</h3>
       <div class="comfort-bags__tiers-grid">
         {%- for block in section.blocks -%}
           {% if block.type == 'bag_tier' %}
             <div class="comfort-bags__tier-card {% if block.settings.featured %}featured{% endif %}" {{ block.shopify_attributes }}>
-              {% if block.settings.badge != blank %}
-                <span class="comfort-bags__tier-badge badge badge-pink">{{ block.settings.badge }}</span>
-              {% endif %}
+              {% if block.settings.badge != blank %}<span class="comfort-bags__tier-badge badge badge-pink">{{ block.settings.badge }}</span>{% endif %}
               <p class="comfort-bags__tier-name">{{ block.settings.name }}</p>
-              <p class="comfort-bags__tier-bags">{{ block.settings.bags_count }} bag{% if block.settings.bags_count > 1 %}s{% endif %}</p>
-              <p class="comfort-bags__tier-price">~{{ block.settings.price }}</p>
-              <a href="#donate" class="btn btn-sm btn-full {% if block.settings.featured %}btn-pink{% else %}btn-outline-pink{% endif %}">
-                {{ block.settings.cta }}
-              </a>
+              <p class="comfort-bags__tier-bags">{{ block.settings.bags_count }} bag</p>
+              <p class="comfort-bags__tier-price">{{ block.settings.price }}</p>
+              <a href="#donate" class="btn btn-sm btn-full {% if block.settings.featured %}btn-pink{% else %}btn-outline-pink{% endif %}">{{ block.settings.cta }}</a>
             </div>
           {% endif %}
         {%- endfor -%}
@@ -70,55 +58,19 @@
 {
   "name": "Comfort Bags",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "The Deluxe Chemo Cabs Comfort Bag" },
-    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Oncology-recommended comforts for long treatment days." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Comfort Bags" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Oncology-recommended comforts." },
     { "type": "image_picker", "id": "image", "label": "Product Image" },
-    { "type": "text", "id": "value_badge", "label": "Value Badge", "default": "~$150–$170 CAD Value" },
+    { "type": "text", "id": "value_badge", "label": "Value Badge", "default": "$170 Value" },
     { "type": "richtext", "id": "description", "label": "Description" },
     { "type": "text", "id": "tiers_title", "label": "Tiers Title", "default": "Gift a Comfort Bag" }
   ],
   "blocks": [
-    {
-      "type": "item",
-      "name": "Bag Item",
-      "settings": [
-        { "type": "text", "id": "icon", "label": "Emoji", "default": "🧣" },
-        { "type": "text", "id": "name", "label": "Item Name", "default": "Blanket" }
-      ]
-    },
-    {
-      "type": "bag_tier",
-      "name": "Donation Tier",
-      "settings": [
-        { "type": "text", "id": "name", "label": "Tier Name", "default": "Single Bag" },
-        { "type": "number", "id": "bags_count", "label": "Bags Count", "default": 1 },
-        { "type": "text", "id": "price", "label": "Price Display", "default": "$170" },
-        { "type": "text", "id": "cta", "label": "CTA Text", "default": "Donate" },
-        { "type": "checkbox", "id": "featured", "label": "Featured Card", "default": false },
-        { "type": "text", "id": "badge", "label": "Badge text", "default": "" }
-      ]
-    }
+    { "type": "item", "name": "Bag Item", "settings": [ { "type": "text", "id": "icon", "label": "Emoji", "default": "🧣" }, { "type": "text", "id": "name", "label": "Item Name", "default": "Blanket" } ] },
+    { "type": "bag_tier", "name": "Donation Tier", "settings": [ { "type": "text", "id": "name", "label": "Tier Name", "default": "Single Bag" }, { "type": "number", "id": "bags_count", "label": "Bags Count", "default": 1 }, { "type": "text", "id": "price", "label": "Price", "default": "$170" }, { "type": "text", "id": "cta", "label": "CTA", "default": "Donate" }, { "type": "checkbox", "id": "featured", "label": "Featured", "default": false }, { "type": "text", "id": "badge", "label": "Badge", "default": "" } ] }
   ],
   "presets": [
-
-    {
-      "name": "Comfort Bags",
-      "blocks": [
-        { "type": "item", "settings": { "icon": "🧣", "name": "Ultra-soft microfleece blanket" } },
-        { "type": "item", "settings": { "icon": "🧦", "name": "Cozy non-slip socks" } },
-        { "type": "item", "settings": { "icon": "😴", "name": "Eye mask" } },
-        { "type": "item", "settings": { "icon": "💧", "name": "Unscented lip balm & lotion" } },
-        { "type": "item", "settings": { "icon": "🚰", "name": "Quality water bottle" } },
-        { "type": "item", "settings": { "icon": "🍬", "name": "Dry-mouth & ginger lozenges" } },
-        { "type": "item", "settings": { "icon": "🍪", "name": "Light snacks" } },
-        { "type": "item", "settings": { "icon": "🤲", "name": "Nausea acupressure wristbands" } },
-        { "type": "item", "settings": { "icon": "💌", "name": "Handwritten encouragement card" } },
-        { "type": "bag_tier", "settings": { "name": "Single Comfort Bag", "bags_count": 1, "price": "$170", "cta": "Donate 1 Bag" } },
-        { "type": "bag_tier", "settings": { "name": "Double the Comfort", "bags_count": 2, "price": "$340", "cta": "Donate 2 Bags", "featured": true, "badge": "★ MOST POPULAR" } },
-        { "type": "bag_tier", "settings": { "name": "Comfort Champion", "bags_count": 5, "price": "$850", "cta": "Donate 5 Bags" } }
-      ]
-    }
-
+    { "name": "Comfort Bags" }
   ]
 }
 {% endschema %}

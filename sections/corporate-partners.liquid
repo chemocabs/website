@@ -69,132 +69,33 @@
 {
   "name": "Corporate Partners",
   "settings": [
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Align Your Brand With a Movement"
-    },
-    {
-      "type": "textarea",
-      "id": "subheading",
-      "label": "Subheading",
-      "default": "Chemo Cabs corporate partners don't just write cheques — they join a visible, high-impact movement."
-    },
-    {
-      "type": "textarea",
-      "id": "selling_point",
-      "label": "Selling Point",
-      "default": "Our partners receive year-round brand visibility across events, media, social channels, and more."
-    },
-    {
-      "type": "text",
-      "id": "contact_email",
-      "label": "Contact Email",
-      "default": "info@chemocabs.org"
-    },
-    {
-      "type": "header",
-      "content": "Partner Logos"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_logos",
-      "label": "Show current partners logos",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "logos_title",
-      "label": "Logos Title",
-      "default": "Current Partners"
-    },
-    {
-      "type": "text",
-      "id": "logos_sub",
-      "label": "Logos Subtext",
-      "default": "Join the growing list of organizations driving hope across Canada."
-    }
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Align Your Brand With a Movement" },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Chemo Cabs corporate partners join a visible, high-impact movement." },
+    { "type": "textarea", "id": "selling_point", "label": "Selling Point", "default": "Our partners receive year-round brand visibility." },
+    { "type": "text", "id": "contact_email", "label": "Contact Email", "default": "info@chemocabs.org" },
+    { "type": "header", "content": "Partner Logos" },
+    { "type": "checkbox", "id": "show_logos", "label": "Show current partners logos", "default": true },
+    { "type": "text", "id": "logos_title", "label": "Logos Title", "default": "Current Partners" },
+    { "type": "text", "id": "logos_sub", "label": "Logos Subtext", "default": "Join the growing list of organizations." }
   ],
   "blocks": [
     {
       "type": "tier",
       "name": "Partnership Tier",
       "settings": [
-        {
-          "type": "select",
-          "id": "style",
-          "label": "Style",
-          "options": [
-            { "value": "silver", "label": "Silver" },
-            { "value": "gold", "label": "Gold" },
-            { "value": "platinum", "label": "Platinum" }
-          ],
-          "default": "silver"
-        },
+        { "type": "select", "id": "style", "label": "Style", "options": [ { "value": "silver", "label": "Silver" }, { "value": "gold", "label": "Gold" }, { "value": "platinum", "label": "Platinum" } ], "default": "silver" },
         { "type": "text", "id": "badge", "label": "Badge", "default": "" },
         { "type": "text", "id": "icon", "label": "Icon/Emoji", "default": "🥇" },
         { "type": "text", "id": "name", "label": "Tier Name", "default": "Gold Partner" },
-        { "type": "text", "id": "range", "label": "Price Range", "default": "$5,000–$24,999" },
+        { "type": "text", "id": "range", "label": "Price Range", "default": "$5,000" },
         { "type": "textarea", "id": "description", "label": "Description" },
-        { "type": "textarea", "id": "perks", "label": "Perks (separate by semicolon ;)" },
+        { "type": "textarea", "id": "perks", "label": "Perks" },
         { "type": "text", "id": "cta", "label": "CTA Text", "default": "Join Now" }
-      ]
-    },
-    {
-      "type": "partner_logo",
-      "name": "Partner Logo",
-      "settings": [
-        { "type": "image_picker", "id": "image", "label": "Partner Logo" },
-        { "type": "text", "id": "partner_name", "label": "Partner Name", "default": "Partner Name" }
       ]
     }
   ],
   "presets": [
-
-    {
-      "name": "Corporate Partners",
-      "blocks": [
-        {
-          "type": "tier",
-          "settings": {
-            "style": "silver",
-            "icon": "🥈",
-            "name": "Silver Partner",
-            "range": "$1,000–$4,999",
-            "description": "Fund dozens of rides and gain brand visibility across our digital platforms.",
-            "perks": "Logo on ChemoCabs.org; Social media acknowledgement (2x/year); Tax receipt & annual impact report; Digital Partner Badge; Certificate of partnership",
-            "cta": "Become a Silver Partner"
-          }
-        },
-        {
-          "type": "tier",
-          "settings": {
-            "style": "gold",
-            "badge": "★ MOST IMPACT",
-            "icon": "🥇",
-            "name": "Gold Partner",
-            "range": "$5,000–$24,999",
-            "description": "Fund hundreds of rides with premium brand placement at all Chemo Cabs events.",
-            "perks": "Everything in Silver; Featured logo placement (homepage + events); Co-branded content; VIP gala table (4 seats); Employee volunteer day coordination",
-            "cta": "Become a Gold Partner"
-          }
-        },
-        {
-          "type": "tier",
-          "settings": {
-            "style": "platinum",
-            "icon": "💎",
-            "name": "Platinum Partner",
-            "range": "$25,000+",
-            "description": "Title-level sponsorship with naming rights, national media, and ultimate brand placement.",
-            "perks": "Everything in Gold; Title sponsor at flagship events; National media feature; Your logo on the Pink '57 Bel Air; Dedicated partnership manager",
-            "cta": "Become a Platinum Partner"
-          }
-        }
-      ]
-    }
-
+    { "name": "Corporate Partners" }
   ]
 }
 {% endschema %}
